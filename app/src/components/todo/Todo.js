@@ -71,7 +71,18 @@ export default class Todo extends React.Component {
     console.log(this.state);
 
     const todos = this.props.todos.map((todo, index) => {
-      return (<li key={'todo' + index}>{todo.todo}<span class="fa fa-remove" style={{color:'#FFF', fontSize: '200%', cursor:'pointer'}} onClick={this.handleRemoveTodo.bind(this, index)}></span></li>)
+      return (
+        <li class="list-group-item" key={'todo' + index}>
+          <span class="float-left">{todo.todo}</span>
+          <span class=" float-right">
+            <span class="fa fa-remove"
+                  style={{color:'#666', fontSize: '120%', cursor:'pointer'}}
+                  onClick={this.handleRemoveTodo.bind(this, index)}>
+
+            </span>
+          </span>
+        </li>
+      )
     });
 
     const disabledAdd = this.textBasicInput ? !this.textBasicInput.state.value : false;
@@ -85,8 +96,8 @@ export default class Todo extends React.Component {
         <h3>{title}</h3>
         <div><BasicInput ref={(input) => { this.textBasicInput = input; }} onChangeHandler={this.onChangeHandler} changeBounce="100" value="Karel 1" formattersX={this.formatters}/></div>
         <Button color="primary" onClick={this.handleAddTodo} disabled={!this.state.textBasicInputValue}>ADD TODO</Button>
-        <Button color="primary" onClick={this.handleRemoveTodo}>REMOVE TODO</Button>
-        <ul>{todos}</ul>
+        <Button color="primary float-right" onClick={this.handleRemoveTodo}>REMOVE TODO</Button>
+        <ul class="list-group col-4">{todos}</ul>
       </div>
     )
   }

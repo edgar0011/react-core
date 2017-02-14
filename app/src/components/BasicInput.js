@@ -1,5 +1,5 @@
 /**
- * Created by edgar on 14/02/2017.
+ * Created by edgar on 11/01/2017.
  */
 import React from 'react';
 import lodash from 'lodash';
@@ -22,11 +22,17 @@ export default class BasicInput extends React.Component {
   }
 
   onChangeHandler(event) {
-    this.setState({value:event.target.value});
-    this._onChangeHandler(event.target.value);
+    let value = event.target.value;
+    if (this.props.formatters) {
+      this.props.formatters.forEach((formatter)=>{
+        value = formatter(value, this.state.value);
+      });
+    }
+    this.setState({value});
+    this._onChangeHandler();
   }
 
-  _onChangeHandler(value){
+  _onChangeHandler(){
     this.props.onChangeHandler(this.state);
   }
 

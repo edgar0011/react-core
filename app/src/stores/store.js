@@ -1,3 +1,6 @@
+/**
+ * Created by edgar on 11/01/2017.
+ */
 import {createStore, combineReducers} from 'redux';
 import todoReducer from '../reducers/totoReducer';
 import userReducer from '../reducers/userReducer';

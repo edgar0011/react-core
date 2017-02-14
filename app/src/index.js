@@ -1,3 +1,7 @@
+/**
+ * Created by edgar on 11/01/2017.
+ */
+
 import React from 'react';
 import ReactDOM from  'react-dom';
 import Layout from './components/Layout';
@@ -12,7 +16,7 @@ import { Provider } from 'react-redux';
 
 
 import 'bootstrap/dist/css/bootstrap.css';
-//import 'bootstrap/dist/css/bootstrap-theme.css';
+import 'font-awesome/css/font-awesome.css'
 
 import { Router, Route, IndexRoute, browserHistory} from 'react-router';
 

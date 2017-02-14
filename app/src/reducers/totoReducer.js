@@ -1,5 +1,6 @@
 
 import { ADD_TODO } from '../config/CONSTANTS';
+import { REMOVE_TODO } from '../config/CONSTANTS';
 
 export default function todoReducer(state = {}, action) {
 
@@ -12,6 +13,10 @@ export default function todoReducer(state = {}, action) {
   if (type === ADD_TODO) {
     state = state.concat();
     state.push({todo: action.payload.text});
+  }
+  if (type === REMOVE_TODO) {
+    state = state.concat();
+    state.splice(action.payload, 1);
   }
 
   return state;

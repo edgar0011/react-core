@@ -34,12 +34,11 @@ export default class Todo extends React.Component {
 
   handleAddTodo() {
     this.props.dispatch(addTodoActions.addTodo(this.textBasicInput.state.value));
-    debugger;
     this.textBasicInput.reset();
 
   }
-  handleRemoveTodo() {
-    this.props.dispatch(addTodoActions.removeTodo());
+  handleRemoveTodo(index) {
+    this.props.dispatch(addTodoActions.removeTodo(index));
   }
 
 
@@ -58,7 +57,7 @@ export default class Todo extends React.Component {
     console.log('Todo: this.state');
     console.log(this.state);
     const todos = this.props.todos.map((todo, index) => {
-      return (<li key={'todo' + index}>{todo.todo}</li>)
+      return (<li key={'todo' + index}>{todo.todo}<span class="glyphicon glyphicon-remove" onClick={this.handleRemoveTodo.bind(this, index)}>REMOVE</span></li>)
     });
     return (
       <div>

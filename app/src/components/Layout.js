@@ -23,7 +23,7 @@ export default class Layout extends React.Component {
 
               <ul class="nav justify-content-center">
                 <li class="nav-item">
-                  <Link to="/" activeClassName="active"><a class="nav-link" href="#">Active</a></Link>
+                  <Link to="/" activeClassName="active" class="nav-link">Active</Link>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Link</a>

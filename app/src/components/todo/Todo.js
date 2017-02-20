@@ -6,15 +6,18 @@ import { Button } from 'reactstrap';
 
 import { connect } from 'react-redux';
 
-import BasicInput from '../BasicInput';
+import BasicInput from '../ui/BasicInput';
 
 import * as addTodoActions from '../../actions/todoActions';
+
+import {TODOS} from '../../styles/basic';
+
 
 @connect((store)=> {
   return {
     todos: store.todos
   }
-})
+}, {addTodo: addTodoActions.addTodo, removeTodo: addTodoActions.removeTodo})
 export default class Todo extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +38,8 @@ export default class Todo extends React.Component {
         value = prevValue;
       }
 
-      return !!value ? parseInt(value.toString()) : '';
+      const val2Str = parseInt(value.toString());
+      return !!value ? (isNaN(val2Str) ? '' : val2Str) : '';
     }]
   }
 
@@ -44,36 +48,29 @@ export default class Todo extends React.Component {
   }
 
   handleAddTodo() {
-    this.props.dispatch(addTodoActions.addTodo(this.textBasicInput.state.value));
+    this.props.addTodo(this.textBasicInput.state.value);
     this.textBasicInput.reset();
     this.setState({textBasicInputValue: null });
 
   }
   handleRemoveTodo(index) {
-    this.props.dispatch(addTodoActions.removeTodo(index));
+    const {todos} = this.props.todos;
+    this.props.removeTodo(todos[index].id);
   }
 
 
   onChangeHandler(basicInputState) {
-      console.log('basicInputState' );
-      console.log(basicInputState);
-      console.log('textBasicInput');
-      console.log(this.textBasicInput);
       this.setState({textBasicInputValue: this.textBasicInput.state.value });
   }
 
   render() {
     const title = 'Todo';
+    const todoStyle = TODOS.TODO.TEXT;
 
-    console.log('Todo: this.props');
-    console.log(this.props);
-    console.log('Todo: this.state');
-    console.log(this.state);
-
-    const todos = this.props.todos.map((todo, index) => {
+    const todos = this.props.todos.todos.map((todo, index) => {
       return (
         <li class="list-group-item" key={'todo' + index}>
-          <span class="float-left">{todo.todo}</span>
+          <span class="float-left" style={todoStyle}>{todo.todo}</span>
           <span class=" float-right">
             <span class="fa fa-remove"
                   style={{color:'#666', fontSize: '120%', cursor:'pointer'}}
@@ -86,18 +83,20 @@ export default class Todo extends React.Component {
     });
 
     const disabledAdd = this.textBasicInput ? !this.textBasicInput.state.value : false;
-    if (this.textBasicInput) {
-      console.log('this.textBasicInput.state.value');
-      console.log(this.textBasicInput.state.value);
-    }
 
     return (
       <div>
         <h3>{title}</h3>
-        <div><BasicInput ref={(input) => { this.textBasicInput = input; }} onChangeHandler={this.onChangeHandler} changeBounce="100" value="Karel 1" formattersX={this.formatters}/></div>
+        <div>
+          <BasicInput ref={(input) => { this.textBasicInput = input; }}
+                      onChangeHandler={this.onChangeHandler}
+                      changeBounce="100" value="Karel 1"
+                      formatters={this.formatters}
+
+          />
+        </div>
         <Button color="primary" onClick={this.handleAddTodo} disabled={!this.state.textBasicInputValue}>ADD TODO</Button>
-        <Button color="primary float-right" onClick={this.handleRemoveTodo}>REMOVE TODO</Button>
-        <ul class="list-group col-4">{todos}</ul>
+        {todos && todos.length>0 && <ul class="list-group col-4">{todos}</ul>}
       </div>
     )
   }

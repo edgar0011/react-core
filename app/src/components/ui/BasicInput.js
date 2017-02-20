@@ -11,7 +11,7 @@ export default class BasicInput extends React.Component {
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
 
-    this.state = {value:this.props.value, errors:{}};
+    this.state = {value:this.props.value || "", errors:{}};
   }
 
   componentWillMount() {
@@ -40,7 +40,7 @@ export default class BasicInput extends React.Component {
 
   render(){
     return (
-      <input type={this.props.type || 'text'} onChange={this.onChangeHandler} value={this.state.value} />
+      <input type={this.props.type || 'text'} onChange={this.onChangeHandler} value={this.state.value} pattern={this.props.pattern} />
     )
   }
 

@@ -4,15 +4,13 @@
 
 import React from 'react';
 import ReactDOM from  'react-dom';
-import Layout from './components/Layout';
+import MainLayout from './components/MainLayout';
 import Todo from './components/todo/Todo';
-import Main from './components/Main';
+import Main from './components/main/Main';
 
 
 import store from './stores/store';
 import { Provider } from 'react-redux';
-
-
 
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -24,7 +22,7 @@ const app = document.getElementById('app');
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={Layout}>
+      <Route path="/" component={MainLayout}>
         <IndexRoute component={Main} ></IndexRoute>
         <Route path="todo" component={Todo}></Route>
       </Route>

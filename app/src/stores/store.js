@@ -1,12 +1,13 @@
 /**
  * Created by edgar on 11/01/2017.
  */
-import {createStore, combineReducers} from 'redux';
-import todoReducer from '../reducers/totoReducer';
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import todoReducer from '../reducers/todoReducer';
 import userReducer from '../reducers/userReducer';
 
-const rootReducer = combineReducers({todos:todoReducer, user:userReducer});
+import thunk from 'redux-thunk';
 
+const rootReducer = combineReducers({todos:todoReducer, users:userReducer});
 
 class Store {
 
@@ -16,10 +17,24 @@ class Store {
 
 }
 
-const store = createStore(rootReducer, {todos:[], user:null}, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-//const store = createStore(rootReducer);
+
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk),
+  // other store enhancers if any
+);
+
+const store = createStore(rootReducer, {todos:{todos:[]}, users:{users:[], user:null}}, enhancer);
+
 
 store.subscribe(()=>{
+  console.log('Store, subscribe');
   console.log(arguments);
   console.log('store changed', store.getState());
 });

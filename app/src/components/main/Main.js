@@ -43,10 +43,12 @@ export default class Main extends React.Component {
 
     console.log(users);
 
+    const {usersLoading} = this.props.users;
+
     return (
       <div>
         <h3>{title}</h3>
-        loadingUsers: {this.props.users.usersLoading}
+        loadingUsers: {usersLoading ? 'TRUE' : 'FALSE'}
 
         <Button color={color} onClick={this.handleClick}>MAIN clicked: {this.state.iterations}</Button>
         {users && users.length>0 && <ul class="list-group col-4">{users}</ul>}

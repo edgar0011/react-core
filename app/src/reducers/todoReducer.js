@@ -5,10 +5,6 @@ import { ADD_TODO, REMOVE_TODO } from '../config/CONSTANTS';
 
 export default function todoReducer(state = {todos:[]}, action) {
 
-  console.log("todoReducer");
-  console.log(state);
-  console.log(action);
-
   const type = action.type;
 
   if (type === ADD_TODO) {
@@ -23,7 +19,10 @@ export default function todoReducer(state = {todos:[]}, action) {
     let newTodods = [...state.todos];
     const id = action.payload;
     const index = newTodods.findIndex(todo => todo.id === id);
-    newTodods.splice(index, 1);
+
+    if (index > -1) {
+      newTodods.splice(index, 1);
+    }
     return {
       ...state,
       todos: newTodods

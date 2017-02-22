@@ -19,6 +19,13 @@ export default class BasicInput extends React.Component {
     this._onChangeHandler = lodash.debounce(this._onChangeHandler, bounce);
   }
 
+  componentWillReceiveProps(nextProps) {
+    let {value} = nextProps;
+    if (value !== this.props.value) {
+      this._setValue(value);
+    }
+  }
+
   onChangeHandler(event) {
     let value = event.target.value;
     if (this.props.formatters) {
@@ -26,7 +33,7 @@ export default class BasicInput extends React.Component {
         value = formatter(value, this.state.value);
       });
     }
-    this.setState({value});
+    this._setValue(value);
     this._onChangeHandler();
   }
 
@@ -35,14 +42,26 @@ export default class BasicInput extends React.Component {
   }
 
   reset() {
-    this.setState({value : ""});
+    this._setValue("");
+  }
+
+  _setValue(value) {
+    this.setState({value});
   }
 
   render(){
+
+    let {value} = this.state;
+
     return (
-      <input type={this.props.type || 'text'} onChange={this.onChangeHandler} value={this.state.value} pattern={this.props.pattern} />
+      <input type={this.props.type || 'text'} onChange={this.onChangeHandler} value={value} pattern={this.props.pattern} />
     )
   }
 
-
 }
+
+BasicInput.propTypes = {
+  onChangeHandler: React.PropTypes.func,
+  type: React.PropTypes.string,
+  value: React.PropTypes.string
+};

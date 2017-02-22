@@ -22,7 +22,8 @@ export default class Todo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      emphasized:false
+      emphasized:false,
+      inputPlaceHolder:"Karel 1"
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleAddTodo = this.handleAddTodo.bind(this);
@@ -49,8 +50,9 @@ export default class Todo extends React.Component {
 
   handleAddTodo() {
     this.props.addTodo(this.textBasicInput.state.value);
+
     this.textBasicInput.reset();
-    this.setState({textBasicInputValue: null });
+    this.setState({textBasicInputValue: null, inputPlaceHolder:'Hello'});
 
   }
   handleRemoveTodo(index) {
@@ -90,7 +92,7 @@ export default class Todo extends React.Component {
         <div>
           <BasicInput ref={(input) => { this.textBasicInput = input; }}
                       onChangeHandler={this.onChangeHandler}
-                      changeBounce="100" value="Karel 1"
+                      changeBounce="100" value={this.state.inputPlaceHolder}
                       formatters={this.formatters}
 
           />

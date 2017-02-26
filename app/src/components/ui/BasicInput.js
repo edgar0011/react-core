@@ -63,5 +63,5 @@ export default class BasicInput extends React.Component {
 BasicInput.propTypes = {
   onChangeHandler: React.PropTypes.func,
   type: React.PropTypes.string,
-  value: React.PropTypes.string
+  value: React.PropTypes.any
 };

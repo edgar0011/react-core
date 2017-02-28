@@ -2,7 +2,7 @@
  * Created by edgar on 11/01/2017.
  */
 import React from 'react';
-import { Button } from 'reactstrap';
+import { Collapse, Button, Col, Row} from 'reactstrap';
 import { connect } from 'react-redux';
 
 import * as usersActions from '../../actions/usersActions';
@@ -46,13 +46,34 @@ export default class Main extends React.Component {
     const {usersLoading} = this.props.users;
 
     return (
-      <div>
-        <h3>{title}</h3>
-        loadingUsers: {usersLoading ? 'TRUE' : 'FALSE'}
+      <Row>
+        <Col>
+          <Row>
+            <Col><h3>{title}</h3></Col>
+          </Row>
+          <Row style={{height:'20px'}}></Row>
+          <Row>
+            <Col>loadingUsers: {usersLoading ? 'TRUE' : 'FALSE'}</Col>
+          </Row>
+          <Row style={{height:'20px'}}></Row>
+          <Row>
+            <Col>
+              <Button color={color} onClick={this.handleClick}>MAIN clicked: {this.state.iterations}</Button>
+            </Col>
+          </Row>
+          <Row style={{height:'20px'}}></Row>
 
-        <Button color={color} onClick={this.handleClick}>MAIN clicked: {this.state.iterations}</Button>
-        {users && users.length>0 && <ul class="list-group col-4">{users}</ul>}
-      </div>
+          <Row>
+            <Col>
+              <Collapse isOpen={users && users.length>0}>
+
+                  {users && users.length>0 && <ul class="list-group col-4">{users}</ul>}
+
+              </Collapse>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     )
   }
 }

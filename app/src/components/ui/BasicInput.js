@@ -15,7 +15,7 @@ export default class BasicInput extends React.Component {
   }
 
   componentWillMount() {
-    const bounce = this.props.changeBounce == undefined ? 300 : this.props.changeBounce;
+    const bounce = this.props.changeBounce === undefined ? 300 : this.props.changeBounce;
     this._onChangeHandler = lodash.debounce(this._onChangeHandler, bounce);
   }
 

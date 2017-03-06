@@ -6,8 +6,7 @@ import { USERS_LOAD, USERS_LOADED, USERS_LOADING, USERS_LOAD_FAILED } from '../c
 
 export default function userReducer(state = {users:[], user:null}, action) {
 
-  console.log("userReducer");
-  console.log(action);
+  console.log("userReducer", state, action);
 
   const {type, payload} = action;
   switch (type) {

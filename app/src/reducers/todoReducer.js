@@ -7,6 +7,8 @@ export default function todoReducer(state = {todos:[]}, action) {
 
   const type = action.type;
 
+  console.log("todoReducer", state, action);
+
   if (type === ADD_TODO) {
     const id = Date.now();
     return {

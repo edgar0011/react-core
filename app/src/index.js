@@ -16,12 +16,12 @@ import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.css'
 
-import { Router, Route, IndexRoute, browserHistory} from 'react-router';
+import { Router, Route, IndexRoute, browserHistory, hashHistory as history} from 'react-router';
 
 const app = document.getElementById('app');
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/" component={MainLayout}>
         <IndexRoute component={Main} ></IndexRoute>
         <Route path="todo" component={Todo}></Route>

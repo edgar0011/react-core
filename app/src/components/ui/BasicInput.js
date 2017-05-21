@@ -1,5 +1,7 @@
-import React from 'react'
-import _ from 'lodash'
+import React from 'react';
+import _ from 'lodash';
+
+import PropTypes from 'prop-types';
 
 export default class BasicInput extends React.Component {
 
@@ -55,7 +57,7 @@ export default class BasicInput extends React.Component {
 }
 
 BasicInput.propTypes = {
-  onChangeHandler: React.PropTypes.func,
-  type: React.PropTypes.string,
-  value: React.PropTypes.any
+  onChangeHandler: PropTypes.func,
+  type: PropTypes.string,
+  value: PropTypes.any
 }

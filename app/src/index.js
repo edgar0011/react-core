@@ -14,7 +14,7 @@ import { Provider } from 'react-redux';
 
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootswatch/Cosmo/bootstrap.css';
+import 'bootswatch/cosmo/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
 
 import { Router, Route, IndexRoute, browserHistory, hashHistory as history} from 'react-router';

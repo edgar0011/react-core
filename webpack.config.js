@@ -9,7 +9,7 @@ const webpack = require('webpack')
 
 module.exports = {
     context: path.join(__dirname, 'app'),
-    devtool: debug ? "inline-sourcemap" : null,
+    devtool: debug ? "inline-sourcemap" : false,
     devServer: {
       historyApiFallback: true,
       contentBase: path.join(__dirname, "dist"),

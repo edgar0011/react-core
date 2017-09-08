@@ -1,23 +1,16 @@
 /**
  * Created by edgar on 11/01/2017.
  */
-import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+
 import todoReducer from '../reducers/todoReducer';
 import userReducer from '../reducers/userReducer';
 
-import thunk from 'redux-thunk';
 
-const rootReducer = combineReducers({todos:todoReducer, users:userReducer});
-
-class Store {
-
-  constructor(){
-
-  }
-
-}
-
-
+const rootReducer = combineReducers({ todos: todoReducer, users: userReducer });
+let window;
 const composeEnhancers =
   typeof window === 'object' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
@@ -30,7 +23,7 @@ const enhancer = composeEnhancers(
   // other store enhancers if any
 );
 
-const store = createStore(rootReducer, {todos:{todos:[]}, users:{users:[], user:null}}, enhancer);
+const store = createStore(rootReducer, {}, enhancer);
 
 
 store.subscribe(()=>{

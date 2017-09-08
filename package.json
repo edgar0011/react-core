@@ -10,7 +10,9 @@
     "build": "webpack",
     "dev": "webpack-dev-server --content-base src --inline --w",
     "dev2": "webpack-dev-server --content-base src --inline --hot",
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "lint": "eslint ./ --cache --ignore-pattern .gitignore",
+    "precommit": "npm run lint"
   },
   "engines": {
     "node": ">=7.0"

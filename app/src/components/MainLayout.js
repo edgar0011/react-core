@@ -14,8 +14,9 @@ export default class MainLayout extends React.Component {
     }
 
     render() {
-        const title = 'Layout';
-
+      const title = 'Layout';
+      console.log('MainLayout props');
+      console.log(this.props);
         return (
           <Container>
             <Row>

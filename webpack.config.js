@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const path = require('path');
 const debug = process.env.NODE_ENV !== "production";
-const webpack = require('webpack')
+const webpack = require('webpack');
 
 module.exports = {
     context: path.join(__dirname, 'app'),

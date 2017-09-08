@@ -16,7 +16,7 @@ export default class ServiceBase {
     });*/
   }
 
-  call(config){
+  call(config) {
     return axios(config);
   }
 

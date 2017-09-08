@@ -1,12 +1,11 @@
 
 import ServiceBase from './ServiceBase';
 
-import {USERS_URL, USER_URL} from '../config/URLS';
+import { USERS_URL, USER_URL } from '../config/URLS';
 
 export default class UserService extends ServiceBase {
-
-  constructor(){
-    super(arguments);
+  constructor(...args) {
+    super(args);
   }
 
   getUsers() {
@@ -14,9 +13,6 @@ export default class UserService extends ServiceBase {
   }
 
   getUser(id) {
-    return super.get(USER_URL, {params:{id:id}});
+    return super.get(USER_URL(id));
   }
-
-
-
 }

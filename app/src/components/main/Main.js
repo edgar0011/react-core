@@ -29,13 +29,15 @@ export default class Main extends React.Component {
 
 
   render() {
+    console.log('Main props');
+    console.log(this.props);
+
     const title = 'Main';
     const color = this.state.emphasized ? 'danger' : 'primary';
 
-    console.log(this.props.users);
     const users = this.props.users.users.map((user, index) => {
       return (
-        <li class="list-group-item" key={'user' + index}>
+        <li class="list-group-item" key={'user' + index} onClick={() => this.props.getUser(user.id)}>
           <span class="float-left" >{user.name}</span>
         </li>
       )
@@ -44,6 +46,19 @@ export default class Main extends React.Component {
     console.log(users);
 
     const {usersLoading} = this.props.users;
+    const {user} = this.props.users;
+    const userMetadata = user && <div>
+      <div><strong>{user.name}</strong></div>
+      <div>{user.username}</div>
+        <div><small>{user.email}</small></div>
+        <address>
+          <strong>{user.address.street}</strong><br/>
+          {user.address.suite}<br/>
+          {user.address.city}<br/>
+          {user.address.zipcode}<br/>
+          <abbr title="Phone">P:</abbr> {user.phone}
+        </address>
+    </div>;
 
     return (
       <Row>
@@ -64,11 +79,16 @@ export default class Main extends React.Component {
           <Row style={{height:'20px'}}></Row>
 
           <Row>
-            <Col>
+            <Col class="col-sm-6">
               <Collapse isOpen={users && users.length>0}>
 
                   {users && users.length>0 && <ul class="list-group col-4">{users}</ul>}
 
+              </Collapse>
+            </Col>
+            <Col class="col-sm-6">
+              <Collapse isOpen={userMetadata}>
+                {userMetadata}
               </Collapse>
             </Col>
           </Row>

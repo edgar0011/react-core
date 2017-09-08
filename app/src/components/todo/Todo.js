@@ -66,6 +66,8 @@ export default class Todo extends React.Component {
   }
 
   render() {
+    console.log('Todo props');
+    console.log(this.props);
     const title = 'Todo';
     const todoStyle = TODOS.TODO.TEXT;
 

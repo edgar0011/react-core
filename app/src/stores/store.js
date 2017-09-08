@@ -39,7 +39,4 @@ store.subscribe(()=>{
   console.log('store changed', store.getState());
 });
 
-window.store = store;
-
-
 export default store;

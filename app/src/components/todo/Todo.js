@@ -13,17 +13,16 @@ import * as addTodoActions from '../../actions/todoActions';
 import {TODOS} from '../../styles/basic';
 
 
-@connect((store)=> {
-  return {
-    todos: store.todos
-  }
-}, {addTodo: addTodoActions.addTodo, removeTodo: addTodoActions.removeTodo})
+@connect((store) => {
+  const { todos } = store;
+  return { todos };
+}, { addTodo: addTodoActions.addTodo, removeTodo: addTodoActions.removeTodo })
 export default class Todo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       emphasized:false,
-      inputPlaceHolder:"Karel 1"
+      inputPlaceHolder: 'Karel 1',
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleAddTodo = this.handleAddTodo.bind(this);
@@ -32,20 +31,23 @@ export default class Todo extends React.Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
 
     this.formatters = [(value, prevValue) => {
-      if (isNaN(Number(value))) {
-        value = prevValue;
+      let newValue = value;
+      if (isNaN(Number(newValue))) {
+        newValue = prevValue;
       }
-      if (isNaN(Number(value)) || Number(value) < 0) {
-        value = prevValue;
+      if (isNaN(Number(newValue)) || Number(newValue) < 0) {
+        newValue = prevValue;
       }
 
-      const val2Str = parseInt(value.toString());
-      return !!value ? (isNaN(val2Str) ? '' : val2Str) : '';
-    }]
+      const val2Str = parseInt(newValue.toString(), 10);
+      return !!newValue ? (isNaN(val2Str) ? '' : val2Str) : '';
+    }];
   }
-
-  handleClick(event) {
-    this.setState({emphasized:!this.state.emphasized});
+  onChangeHandler() {
+    this.setState({ textBasicInputValue: this.textBasicInput.state.value });
+  }
+  handleClick() {
+    this.setState({ emphasized: !this.state.emphasized });
   }
 
   handleAddTodo() {
@@ -61,9 +63,7 @@ export default class Todo extends React.Component {
   }
 
 
-  onChangeHandler(basicInputState) {
-      this.setState({textBasicInputValue: this.textBasicInput.state.value });
-  }
+
 
   render() {
     console.log('Todo props');

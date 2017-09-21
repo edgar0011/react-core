@@ -14,3 +14,5 @@ export const USER_LOAD = 'userLoad';
 export const USER_LOADED = 'userLoaded';
 export const USER_LOADING = 'userLoading';
 export const USER_LOAD_FAILED = 'userLoadFailed';
+
+export const REMOVE_USER = 'removeUser';

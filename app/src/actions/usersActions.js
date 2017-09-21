@@ -1,9 +1,8 @@
-/**
- * Created by edgar on 11/01/2017.
- */
+// @flow
+
 import {
   USERS_LOADED, USERS_LOADING, USERS_LOAD_FAILED,
-  USER_LOADED, USER_LOADING, USER_LOAD_FAILED,
+  USER_LOADED, USER_LOADING, USER_LOAD_FAILED, REMOVE_USER
 } from '../config/CONSTANTS';
 
 import UserService from '../dataApi/UserService';
@@ -16,14 +15,14 @@ export function usersLoading() {
   };
 }
 
-export function usersLoaded(users) {
+export function usersLoaded(users:Array<any>) {
   return {
     type: USERS_LOADED,
     payload: users,
   };
 }
 
-export function usersLoadFailed(errors) {
+export function usersLoadFailed(errors:any) {
   return {
     type: USERS_LOAD_FAILED,
     payload: errors,
@@ -31,7 +30,7 @@ export function usersLoadFailed(errors) {
 }
 
 export function getUsers() {
-  return function (dispatch) {
+  return (dispatch:Function) => {
     dispatch(usersLoading());
 
     return userService.getUsers()
@@ -49,22 +48,22 @@ export function userLoading() {
   };
 }
 
-export function userLoaded(user) {
+export function userLoaded(user:any) {
   return {
     type: USER_LOADED,
     payload: user,
   };
 }
 
-export function userLoadFailed(errors) {
+export function userLoadFailed(errors:any) {
   return {
     type: USER_LOAD_FAILED,
     payload: errors,
   };
 }
 
-export function getUser(id) {
-  return function (dispatch) {
+export function getUser(id:any) {
+  return (dispatch:Function) => {
     dispatch(userLoading());
 
     return userService.getUser(id)
@@ -73,5 +72,12 @@ export function getUser(id) {
       }, (errors) => {
         dispatch(userLoadFailed(errors));
       });
+  };
+}
+
+export function removeUser(id:any) {
+  return {
+    type: REMOVE_USER,
+    payload: id,
   };
 }

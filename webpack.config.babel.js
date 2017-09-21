@@ -15,7 +15,7 @@ const debug = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   context: path.join(__dirname, 'app'),
-  devtool: debug ? 'inline-sourcemap' : false,
+  devtool: debug ? 'inline-sourcemap' : '',
   devServer: {
     historyApiFallback: true,
     contentBase: path.join(__dirname, 'dist'),

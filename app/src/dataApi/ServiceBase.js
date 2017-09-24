@@ -6,14 +6,16 @@ import axios from 'axios';
 
 export default class ServiceBase {
 
-  constructor() {
-    console.log(arguments);
-    //TODO maybe
-    /*var instance = axios.create({
+  constructor(config = null) {
+    if (config) {
+      this.instance = axios.create(config);
+    }
+    // TODO maybe
+    /* var instance = axios.create({
       baseURL: 'https://some-domain.com/api/',
       timeout: 1000,
       headers: {'X-Custom-Header': 'foobar'}
-    });*/
+    }); */
   }
 
   call(config) {

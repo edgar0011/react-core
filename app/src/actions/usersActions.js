@@ -69,8 +69,10 @@ export function getUser(id:any) {
     return userService.getUser(id)
       .then((response) => {
         dispatch(userLoaded(response.data));
+        return response;
       }, (errors) => {
         dispatch(userLoadFailed(errors));
+        return errors;
       });
   };
 }

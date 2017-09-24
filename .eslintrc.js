@@ -17,6 +17,7 @@ module.exports = {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-unknown-property": [2, { "ignore": ["class", "for"] }],
     "react/require-default-props": 0,
-  "react/forbid-prop-types": [0, { "forbid": ['array', 'object'] }]
+  "react/forbid-prop-types": [0, { "forbid": ['array', 'object'] }],
+    "class-methods-use-this": 0
   }
 };

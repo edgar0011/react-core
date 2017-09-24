@@ -8,8 +8,6 @@ import { Container, Row, Col } from 'reactstrap';
 
 export default function MainLayout(props:any) {
   const title = 'Layout';
-  console.log('MainLayout props');
-  console.log(props);
   return (
     <Container>
       <Row>

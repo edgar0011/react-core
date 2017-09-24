@@ -5,8 +5,6 @@ import { USER_LOAD, USER_LOADED, USER_LOADING, USER_LOAD_FAILED, REMOVE_USER } f
 import { USERS_LOAD, USERS_LOADED, USERS_LOADING, USERS_LOAD_FAILED } from '../config/CONSTANTS';
 
 export default function userReducer(state = { users: [], user: null }, action) {
-  console.log('userReducer', state, action);
-
   const { type, payload } = action;
   switch (type) {
     // USER

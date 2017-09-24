@@ -19,10 +19,9 @@ export default class Main extends Component {
       iterations: 0,
       userDetailOpened: false,
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick = () => {
     this.setState(
       { ...this.state, emphasized: !this.state.emphasized, iterations: ++this.state.iterations },
     );

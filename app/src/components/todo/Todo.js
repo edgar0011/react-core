@@ -24,11 +24,6 @@ export default class Todo extends React.Component {
       emphasized:false,
       inputPlaceHolder: 'Karel 1',
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleRemoveTodo = this.handleRemoveTodo.bind(this);
-
-    this.onChangeHandler = this.onChangeHandler.bind(this);
 
     this.formatters = [(value, prevValue) => {
       let newValue = value;
@@ -43,27 +38,25 @@ export default class Todo extends React.Component {
       return !!newValue ? (isNaN(val2Str) ? '' : val2Str) : '';
     }];
   }
-  onChangeHandler() {
+  onChangeHandler = () => {
     this.setState({ textBasicInputValue: this.textBasicInput.state.value });
   }
-  handleClick() {
+  handleClick = () => {
     this.setState({ emphasized: !this.state.emphasized });
   }
 
-  handleAddTodo() {
+  handleAddTodo = () => {
     this.props.addTodo(this.textBasicInput.state.value);
 
     this.textBasicInput.reset();
     this.setState({textBasicInputValue: null, inputPlaceHolder:'Hello'});
 
   }
-  handleRemoveTodo(index) {
+
+  handleRemoveTodo = (index) => {
     const {todos} = this.props.todos;
     this.props.removeTodo(todos[index].id);
   }
-
-
-
 
   render() {
     const title = 'Todo';

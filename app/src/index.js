@@ -5,11 +5,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, hashHistory as history } from 'react-router';
+import { Router, Route, Redirect, hashHistory as history } from 'react-router';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootswatch/cosmo/bootstrap.css';
 import 'font-awesome/css/font-awesome.css';
+import './styles/bootstrap-override.scss';
+import './styles/main.scss';
 
 import MainLayout from './components/MainLayout';
 import Todo from './components/todo/Todo';
@@ -21,8 +23,9 @@ const app = document.getElementById('app');
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
+      <Redirect from="/" to="main" />
       <Route path="/" component={MainLayout}>
-        <IndexRoute component={Main} />
+        <Route path="main" component={Main} />
         <Route path="todo" component={Todo} />
       </Route>
     </Router>

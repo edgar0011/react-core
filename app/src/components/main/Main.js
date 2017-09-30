@@ -81,54 +81,52 @@ export default class Main extends Component {
     </div>;
 
     return (
-      <Row>
-        <Col>
-          <Row>
-            <Col><h3>{title}</h3></Col>
-          </Row>
-          <Row style={{ height: '20px' }} />
-          <Row>
-            <Col>loadingUsers: {usersLoading ? 'TRUE' : 'FALSE'}</Col>
-          </Row>
-          <Row style={{ height: '20px' }} />
-          <Row>
-            <Col>
-              <Button
-                color={color}
-                onClick={this.handleClick}
-              >
-                MAIN clicked: {this.state.iterations}
-              </Button>
-            </Col>
-          </Row>
-          <Row style={{ height: '20px' }} />
+      <div>
+        <Row>
+          <Col><h3>{title}</h3></Col>
+        </Row>
+        <Row style={{ height: '20px' }} />
+        <Row>
+          <Col>loadingUsers: {usersLoading ? 'TRUE' : 'FALSE'}</Col>
+        </Row>
+        <Row style={{ height: '20px' }} />
+        <Row>
+          <Col>
+            <Button
+              color={color}
+              onClick={this.handleClick}
+            >
+              MAIN clicked: {this.state.iterations}
+            </Button>
+          </Col>
+        </Row>
+        <Row style={{ height: '20px' }} />
 
-          <Row>
-            <Col class="col-sm-6">
-              <Collapse
-                isOpened={users && users.length > 0}
-                springConfig={{ stiffness: 300, damping: 30 }}
-              >
-                {users && users.length > 0 && <ul class="list-group col-4">{users}</ul>}
-              </Collapse>
-            </Col>
-            <Col class="col-sm-6">
-              <Collapse
-                isOpened={this.state.userDetailOpened}
-                springConfig={{ stiffness: 300, damping: 40 }}
-              >
-                {userMetadata}
-                <button
-                  class="btn btn-info"
-                  onClick={() => {
-                    this.hideUserDetail();
-                  }}
-                >Close</button>
-              </Collapse>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+        <Row>
+          <Col class="col-sm-6">
+            <Collapse
+              isOpened={users && users.length > 0}
+              springConfig={{ stiffness: 300, damping: 30 }}
+            >
+              {users && users.length > 0 && <ul class="list-group col-4">{users}</ul>}
+            </Collapse>
+          </Col>
+          <Col class="col-sm-6">
+            <Collapse
+              isOpened={this.state.userDetailOpened}
+              springConfig={{ stiffness: 300, damping: 40 }}
+            >
+              {userMetadata}
+              <button
+                class="btn btn-info"
+                onClick={() => {
+                  this.hideUserDetail();
+                }}
+              >Close</button>
+            </Collapse>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

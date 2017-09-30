@@ -39,6 +39,10 @@ module.exports = {
         loader: ['style-loader', 'css-loader'],
       },
       {
+        test: /\.scss?$/,
+        loader: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         use: 'url-loader?limit=10000&mimetype=application/font-woff',
       }, {
@@ -53,6 +57,11 @@ module.exports = {
       }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: 'url-loader?limit=10000&mimetype=image/svg+xml',
+      },
+      {
+        // IMAGE LOADER
+        test: /\.(jpe?g|png|gif|svg|ico)$/i,
+        use: 'file-loader?name=images/[name].[ext]',
       },
     ],
   },

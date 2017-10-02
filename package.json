@@ -50,7 +50,7 @@
     "babel-preset-stage-0": "6.24.1",
     "babel-preset-stage-1": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
-    "bootstrap": "4.0.0-beta.4",
+    "bootstrap": "4.0.0-beta",
     "bootswatch": "3.3.7",
     "classnames": "2.2.5",
     "clean-webpack-plugin": "0.1.15",

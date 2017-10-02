@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as usersActions from '../../actions/usersActions';
 
-
 @connect((store) => {
   const { users } = store;
   return { users };
-}, { getUsers: usersActions.getUsers, getUser: usersActions.getUser, removeUser: usersActions.removeUser })
+}, { getUsers: usersActions.getUsers,
+  getUser: usersActions.getUser,
+  removeUser: usersActions.removeUser })
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +28,7 @@ export default class Main extends Component {
     );
 
     this.props.getUsers();
-  }
+  };
 
   handleUserClick(user) {
     this.props.getUser(user.id).then((response) => {
@@ -42,6 +43,13 @@ export default class Main extends Component {
     this.setState({ userDetailOpened: false });
   }
 
+  handleRemoveUser = (id) => {
+    if (this.props.users.user && this.props.users.user.id === id) {
+      this.hideUserDetail();
+    }
+    this.props.removeUser(id);
+  };
+
   render() {
     const title = 'Main';
     const color = this.state.emphasized ? 'danger' : 'primary';
@@ -49,19 +57,38 @@ export default class Main extends Component {
     const users = this.props.users.users.map((user, index) => {
       const ii = index + 100;
       return (
-        <a
-          href="#"
-          role="menu"
+        /* eslint jsx-a11y/href-no-hash:0 */
+        <li
+          class="list-group-item"
           key={`user${ii}`}
-          onClick={(event) => {
-            event.preventDefault();
-            this.handleUserClick(user);
-          }}
         >
-          <li class="list-group-item" >
-            <span class="float-left" >{user.name}</span>
-          </li>
-        </a>
+          <a
+            href="#"
+            role="menu"
+            onClick={(event) => {
+              event.preventDefault();
+              this.handleUserClick(user);
+            }}
+          >
+            <span class="float-left" >
+              {user.name}
+              <br />
+              <small>{user.email}</small>
+            </span>
+            <span class="float-right">
+              <Button
+                color="danger"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  this.handleRemoveUser(user.id);
+                }}
+              >
+                Remove
+              </Button>
+            </span>
+          </a>
+        </li>
       );
     });
 
@@ -108,7 +135,7 @@ export default class Main extends Component {
               isOpened={users && users.length > 0}
               springConfig={{ stiffness: 300, damping: 30 }}
             >
-              {users && users.length > 0 && <ul class="list-group col-4">{users}</ul>}
+              {users && users.length > 0 && <ul class="list-group">{users}</ul>}
             </Collapse>
           </Col>
           <Col class="col-sm-6">

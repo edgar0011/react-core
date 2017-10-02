@@ -5,7 +5,6 @@
 import axios from 'axios';
 
 export default class ServiceBase {
-
   constructor(config = null) {
     if (config) {
       this.instance = axios.create(config);
@@ -29,5 +28,5 @@ export default class ServiceBase {
   post(url, data, config = null) {
     return axios.post(url, data, config);
   }
-
 }
+

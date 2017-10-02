@@ -1,8 +1,8 @@
 /**
  * Created by edgar on 11/01/2017.
  */
-import { USER_LOAD, USER_LOADED, USER_LOADING, USER_LOAD_FAILED, REMOVE_USER } from '../config/CONSTANTS';
-import { USERS_LOAD, USERS_LOADED, USERS_LOADING, USERS_LOAD_FAILED } from '../config/CONSTANTS';
+import { USER_LOADED, USER_LOADING, USER_LOAD_FAILED, REMOVE_USER,
+  USERS_LOADED, USERS_LOADING, USERS_LOAD_FAILED } from '../config/CONSTANTS';
 
 export default function userReducer(state = { users: [], user: null }, action) {
   const { type, payload } = action;
@@ -26,7 +26,7 @@ export default function userReducer(state = { users: [], user: null }, action) {
     // USERS
     case USERS_LOADING: {
       return {
-        ...state, usersLoading: true
+        ...state, usersLoading: true,
       };
     }
     case USERS_LOADED: {
@@ -41,7 +41,7 @@ export default function userReducer(state = { users: [], user: null }, action) {
     }
     case REMOVE_USER: {
       return {
-        ...state, user: null, userLoading: false,
+        ...state, users: state.users.filter(user => user.id !== action.payload), userLoading: false,
       };
     }
     default: {

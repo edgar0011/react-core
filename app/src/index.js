@@ -5,7 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, Redirect, hashHistory as history, browserHistory } from 'react-router';
+import { Router, Route, Redirect, browserHistory } from 'react-router';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootswatch/cosmo/bootstrap.css';

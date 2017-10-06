@@ -13,6 +13,14 @@ import * as usersActions from '../../actions/usersActions';
   getUser: usersActions.getUser,
   removeUser: usersActions.removeUser })
 export default class Main extends Component {
+  static propTypes = {
+    getUsers: PropTypes.func,
+    getUser: PropTypes.func,
+    removeUser: PropTypes.func,
+    user: PropTypes.object,
+    users: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -157,11 +165,3 @@ export default class Main extends Component {
     );
   }
 }
-
-Main.propTypes = {
-  getUsers: PropTypes.func,
-  getUser: PropTypes.func,
-  removeUser: PropTypes.func,
-  user: PropTypes.object,
-  users: PropTypes.array,
-};

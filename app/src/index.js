@@ -5,7 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, Redirect, hashHistory as history } from 'react-router';
+import { Router, Route, Redirect, hashHistory as history, browserHistory } from 'react-router';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootswatch/cosmo/bootstrap.css';
@@ -22,7 +22,7 @@ import store from './stores/store';
 const app = document.getElementById('app');
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Redirect from="/" to="main" />
       <Route path="/" component={MainLayout}>
         <Route path="main" component={Main} />

@@ -11,10 +11,10 @@ export default class ServiceBase {
     }
     // TODO maybe
     /* var instance = axios.create({
-      baseURL: 'https://some-domain.com/api/',
-      timeout: 1000,
-      headers: {'X-Custom-Header': 'foobar'}
-    }); */
+     baseURL: 'https://some-domain.com/api/',
+     timeout: 1000,
+     headers: {'X-Custom-Header': 'foobar'}
+     }); */
   }
 
   call(config) {
@@ -27,6 +27,18 @@ export default class ServiceBase {
 
   post(url, data, config = null) {
     return axios.post(url, data, config);
+  }
+
+  put(url, data, config = null) {
+    return axios.put(url, data, config);
+  }
+
+  patch(url, data, config = null) {
+    return axios.patch(url, data, config);
+  }
+
+  delete(url, data, config = null) {
+    return axios.delete(url, config);
   }
 }
 

@@ -53,7 +53,7 @@ module.exports = {
         use: 'url-loader?limit=10000&mimetype=application/octet-stream',
       }, {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader'
+        use: 'file-loader',
       }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: 'url-loader?limit=10000&mimetype=image/svg+xml',

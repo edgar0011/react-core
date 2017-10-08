@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import { Container, Row, Col } from 'reactstrap';
 
 export default function MainLayout(props:any) {
-  const title = 'Layout';
+  const title = 'React Core, boilerplate app';
   return (
     <Container>
       <Row>

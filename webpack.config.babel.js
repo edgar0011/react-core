@@ -7,6 +7,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import ManifestPlugin from 'webpack-manifest-plugin';
 import FlowBabelWebpackPlugin from 'flow-babel-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
 import webpack from 'webpack';
 
@@ -25,7 +26,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: `${__dirname}/dist`,
-    filename: 'react-core-bundle.js',
+    filename: 'react-core.bundle.js',
   },
   module: {
     loaders: [
@@ -38,9 +39,29 @@ module.exports = {
         test: /\.css?$/,
         loader: ['style-loader', 'css-loader'],
       },
-      {
+      /*{
         test: /\.scss?$/,
         loader: ['style-loader', 'css-loader', 'sass-loader'],
+      },*/
+      {
+        test: /\.scss/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
+        }),
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -92,6 +113,9 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ManifestPlugin(),
     new FlowBabelWebpackPlugin(),
+    new ExtractTextPlugin({
+      filename: 'react-core.bundle.css',
+    }),
   ].concat(debug ? [] : [
 
     new webpack.DefinePlugin({

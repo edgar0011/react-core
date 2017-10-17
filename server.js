@@ -1,6 +1,11 @@
+
 import express from 'express';
+
 const app = express();
 
-app.use(express.static(__dirname + '/dist'));
+/* global __dirname */
+app.use(express.static(`${__dirname}/dist`));
 
-app.listen(process.env.PORT || 8080);
+const server = app.listen(process.env.PORT || 8080, () => {
+  console.log(`server running at: ${server.address().port}`);
+});

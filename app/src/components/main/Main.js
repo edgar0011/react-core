@@ -1,4 +1,6 @@
 
+// @flow
+
 import React, { Component } from 'react';
 import { Button, Col, Row } from 'reactstrap';
 import Collapse from 'react-collapse';
@@ -7,12 +9,13 @@ import PropTypes from 'prop-types';
 import * as usersActions from '../../actions/usersActions';
 
 @connect((store) => {
+  console.log(store.dispatch);
   const { users } = store;
   return { users };
 }, { getUsers: usersActions.getUsers,
   getUser: usersActions.getUser,
   removeUser: usersActions.removeUser })
-export default class Main extends Component {
+export default class Main extends Component<any, any> {
   static propTypes = {
     getUsers: PropTypes.func,
     getUser: PropTypes.func,
@@ -21,8 +24,15 @@ export default class Main extends Component {
     users: PropTypes.object,
   };
 
-  constructor(props) {
+  static contextTypes: {
+    router: PropTypes.object.isRequired,
+  };
+
+  constructor(props:any, context?:any) {
     super(props);
+    console.log('Main');
+    console.log(props);
+    console.log(context);
     this.state = {
       emphasized: false,
       iterations: 0,
@@ -31,27 +41,33 @@ export default class Main extends Component {
   }
 
   handleClick = () => {
+    const state = this.state;
     this.setState(
-      { ...this.state, emphasized: !this.state.emphasized, iterations: ++this.state.iterations },
+      { ...state,
+        emphasized: state ? !state.emphasized : false,
+        iterations: state ? ++state.iterations : 0,
+      },
     );
 
     this.props.getUsers();
   };
 
-  handleUserClick(user) {
+  handleUserClick(user:{id:number}) {
     this.props.getUser(user.id).then((response) => {
       console.log('handleUserClick ', response);
-      this.setState({ userDetailOpened: true });
+      const state = this.state;
+      this.setState({ ...state, userDetailOpened: true });
     }, (error) => {
       console.log('handleUserClick error ', error);
     });
   }
 
-  hideUserDetail() {
-    this.setState({ userDetailOpened: false });
+  hideUserDetail():void {
+    const state = this.state;
+    this.setState({ ...state, userDetailOpened: false });
   }
 
-  handleRemoveUser = (id) => {
+  handleRemoveUser = (id:number) => {
     if (this.props.users.user && this.props.users.user.id === id) {
       this.hideUserDetail();
     }

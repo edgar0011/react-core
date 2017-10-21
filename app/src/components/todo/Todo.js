@@ -1,6 +1,4 @@
-/**
- * Created by edgar on 11/01/2017.
- */
+
 import React from 'react';
 import { Button, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';

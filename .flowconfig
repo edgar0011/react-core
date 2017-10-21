@@ -1,5 +1,5 @@
 [ignore]
-
+esproposal.decorators=ignore
 [include]
 
 [libs]
@@ -7,3 +7,4 @@
 [lints]
 
 [options]
+esproposal.decorators=ignore

@@ -42,12 +42,18 @@ export default class Main extends Component<any, any> {
 
   handleClick = () => {
     const state = this.state;
-    this.setState(
+    this.setState({ emphasized: !state.emphasized, iterations: ++state.iterations });
+    /* this.setState(
       { ...state,
         emphasized: state ? !state.emphasized : false,
         iterations: state ? ++state.iterations : 0,
       },
-    );
+    ); */
+
+    /* this.setState( state => ({
+      emphasized: state ? !state.emphasized : false,
+      iterations: state ? ++state.iterations : 0,
+    })); */
 
     this.props.getUsers();
   };
@@ -63,8 +69,7 @@ export default class Main extends Component<any, any> {
   }
 
   hideUserDetail():void {
-    const state = this.state;
-    this.setState({ ...state, userDetailOpened: false });
+    this.setState({ userDetailOpened: false });
   }
 
   handleRemoveUser = (id:number) => {

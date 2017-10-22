@@ -1,8 +1,11 @@
 
-import React from 'react';
+// @flow
+
+import React, { Component } from 'react';
 import { Button, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { dom } from 'flow';
 
 import BasicInput from '../ui/BasicInput';
 
@@ -14,8 +17,8 @@ import TODOS from '../../styles/basic';
   const { todos } = store;
   return { todos };
 }, { addTodo: addTodoActions.addTodo, removeTodo: addTodoActions.removeTodo })
-export default class Todo extends React.Component {
-  constructor(props) {
+export default class Todo extends Component<any, any> {
+  constructor(props: any) {
     super(props);
     this.state = {
       emphasized: false,
@@ -52,10 +55,13 @@ export default class Todo extends React.Component {
     this.setState({ textBasicInputValue: null, inputPlaceHolder: 'Hello' });
   };
 
-  handleRemoveTodo = (index) => {
+  handleRemoveTodo = (index:Number) => {
     const { todos } = this.props.todos;
     this.props.removeTodo(todos[index].id);
   };
+
+  formatters: any;
+  textBasicInput: dom.HTMLInputElement;
 
   render() {
     const title = 'Todo';

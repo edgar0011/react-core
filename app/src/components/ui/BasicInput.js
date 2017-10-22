@@ -1,27 +1,39 @@
-import React from 'react';
+// @flow
+
+import React, { Component } from 'react';
 import _ from 'lodash';
 
 import PropTypes from 'prop-types';
 
-export default class BasicInput extends React.Component {
-  constructor(props) {
+export default class BasicInput extends Component<any, any> {
+  static propTypes = {
+    onChangeHandler: PropTypes.func,
+    type: PropTypes.string,
+    pattern: PropTypes.string,
+    className: PropTypes.string,
+    value: PropTypes.any,
+    formatters: PropTypes.array,
+    changeBounce: PropTypes.number,
+  };
+
+  constructor(props: any) {
     super(props);
     this.state = { value: this.props.value || '', errors: {} };
   }
 
   componentWillMount() {
     const bounce = this.props.changeBounce === undefined ? 300 : this.props.changeBounce;
-    this.propsOnChangeHandler = _.debounce(this.propsOnChangeHandler, bounce);
+    this.propsOnChangeHandler = _.debounce(this.doPropsOnChangeHandler, bounce);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: any) {
     const { value } = nextProps;
     if (value !== this.props.value) {
       this.setValue(value);
     }
   }
 
-  onChangeHandler = (event) => {
+  onChangeHandler = (event: Object) => {
     let { value } = event.target;
     if (this.props.formatters) {
       this.props.formatters.forEach((formatter) => {
@@ -33,7 +45,7 @@ export default class BasicInput extends React.Component {
   };
 
 
-  setValue(value) {
+  setValue(value: any) {
     this.setState({ value });
   }
 
@@ -41,9 +53,11 @@ export default class BasicInput extends React.Component {
     this.setValue('');
   }
 
-  propsOnChangeHandler(value) {
+  doPropsOnChangeHandler(value: any) {
     this.props.onChangeHandler(value);
   }
+
+  propsOnChangeHandler: Function;
 
   render() {
     const { value } = this.state;

@@ -10,6 +10,7 @@ import { dom } from 'flow';
 import BasicInput from '../ui/BasicInput';
 import * as addTodoActions from '../../actions/todoActions';
 import TODOS from '../../styles/basic';
+/* eslint no-unused-vars:0 */
 import fbService from '../../dataApi/FB';
 
 @connect((store) => {

@@ -8,10 +8,9 @@ import PropTypes from 'prop-types';
 import { dom } from 'flow';
 
 import BasicInput from '../ui/BasicInput';
-
 import * as addTodoActions from '../../actions/todoActions';
-
 import TODOS from '../../styles/basic';
+import fbService from '../../dataApi/FB';
 
 @connect((store) => {
   const { todos } = store;
@@ -38,6 +37,8 @@ export default class Todo extends Component<any, any> {
       const val2strNornalized = isNaN(val2Str) ? '' : val2Str;
       return newValue ? val2strNornalized : '';
     }];
+
+    // fbService();
   }
 
   onChangeHandler = () => {

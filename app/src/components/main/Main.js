@@ -6,6 +6,7 @@ import { Button, Col, Row } from 'reactstrap';
 import Collapse from 'react-collapse';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { User } from '../user/User';
 import * as usersActions from '../../actions/usersActions';
 
 @connect((store) => {
@@ -24,12 +25,8 @@ export default class Main extends Component<any, any> {
     users: PropTypes.object,
   };
 
-  static contextTypes: {
-    router: PropTypes.object.isRequired,
-  };
-
-  constructor(props:any, context?:any) {
-    super(props);
+  constructor(props: any, context: any) {
+    super(props, context);
     console.log('Main');
     console.log(props);
     console.log(context);
@@ -180,6 +177,11 @@ export default class Main extends Component<any, any> {
                 }}
               >Close</button>
             </Collapse>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <User />
           </Col>
         </Row>
       </div>

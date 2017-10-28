@@ -12,7 +12,6 @@ import path from 'path';
 import webpack from 'webpack';
 
 const debug = process.env.NODE_ENV !== 'production';
-console.log('debug:', debug);
 
 module.exports = {
   context: path.join(__dirname, 'app'),

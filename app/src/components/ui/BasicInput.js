@@ -16,8 +16,8 @@ export default class BasicInput extends Component<any, any> {
     changeBounce: PropTypes.number,
   };
 
-  constructor(props: any) {
-    super(props);
+  constructor(props: any, context: any) {
+    super(props, context);
     this.state = { value: this.props.value || '', errors: {} };
   }
 
@@ -62,19 +62,13 @@ export default class BasicInput extends Component<any, any> {
   render() {
     const { value } = this.state;
     const { type, className, pattern } = this.props;
+    const { dto } = this.context;
+    console.log('BasicInput:');
+    console.log(dto);
+    console.log(this.context);
 
     return (
       <input type={type || 'text'} class={className} onChange={this.onChangeHandler} value={value} pattern={pattern} />
     );
   }
 }
-
-BasicInput.propTypes = {
-  onChangeHandler: PropTypes.func,
-  type: PropTypes.string,
-  pattern: PropTypes.string,
-  className: PropTypes.string,
-  value: PropTypes.any,
-  formatters: PropTypes.array,
-  changeBounce: PropTypes.number,
-};

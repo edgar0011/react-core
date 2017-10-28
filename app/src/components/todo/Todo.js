@@ -10,6 +10,9 @@ import { dom } from 'flow';
 import BasicInput from '../ui/BasicInput';
 import * as addTodoActions from '../../actions/todoActions';
 import TODOS from '../../styles/basic';
+
+import TodoCard from './TodoCard';
+
 /* eslint no-unused-vars:0 */
 import fbService from '../../dataApi/FB';
 
@@ -18,8 +21,14 @@ import fbService from '../../dataApi/FB';
   return { todos };
 }, { addTodo: addTodoActions.addTodo, removeTodo: addTodoActions.removeTodo })
 export default class Todo extends Component<any, any> {
-  constructor(props: any) {
-    super(props);
+  static propTypes = {
+    todos: PropTypes.object,
+    addTodo: PropTypes.func,
+    removeTodo: PropTypes.func,
+  };
+
+  constructor(props: any, context: any) {
+    super(props, context);
     this.state = {
       emphasized: false,
       inputPlaceHolder: 'Karel 1',
@@ -57,7 +66,7 @@ export default class Todo extends Component<any, any> {
     this.setState({ textBasicInputValue: null, inputPlaceHolder: 'Hello' });
   };
 
-  handleRemoveTodo = (index:Number) => {
+  handleRemoveTodo = (index:number) => {
     const { todos } = this.props.todos;
     this.props.removeTodo(todos[index].id);
   };
@@ -68,8 +77,8 @@ export default class Todo extends Component<any, any> {
   render() {
     const title = 'Todo';
     const todoStyle = TODOS.TODO.TEXT;
-
-    const todos = this.props.todos.todos.map((todo, index) => (
+    const todos = this.props.todos && this.props.todos.todos ? this.props.todos.todos : [];
+    const todosNodes = todos.map((todo, index) => (
       <li class="list-group-item" key={`todo${todo.id}`}>
         <span class="float-left" style={todoStyle}>{todo.todo}</span>
         <span class=" float-right">
@@ -100,13 +109,14 @@ export default class Todo extends Component<any, any> {
                   value={this.state.inputPlaceHolder}
                   formatters={this.formatters}
                 />
+                <TodoCard />
               </div>
               <Button color="primary" onClick={this.handleAddTodo} disabled={!this.state.textBasicInputValue}>ADD TODO</Button>
             </Col>
           </Row>
           <Row>
             <Col class="col-sm-6">
-              {todos && todos.length > 0 && <ul class="list-group">{todos}</ul>}
+              {todosNodes && todosNodes.length > 0 && <ul class="list-group">{todosNodes}</ul>}
             </Col>
           </Row>
         </Col>
@@ -114,9 +124,3 @@ export default class Todo extends Component<any, any> {
     );
   }
 }
-
-Todo.propTypes = {
-  todos: PropTypes.array,
-  addTodo: PropTypes.func,
-  removeTodo: PropTypes.func,
-};

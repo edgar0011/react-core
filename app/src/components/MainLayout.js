@@ -8,19 +8,24 @@ import { Container, Row, Col } from 'reactstrap';
 
 import PropTypes from 'prop-types';
 
-export default class MainLayout extends Component<any, void> {
-  constructor(props:any, context:any) {
+export default class MainLayout extends Component<any, any> {
+  static contextTypes: {
+    router: PropTypes.func.isRequired,
+  };
+
+  constructor(props: any, context: any) {
     super(props);
-    /* eslint no-debugger:0 */
-    debugger;
     console.log('MainLayout');
     console.log(props);
     console.log(context);
+    console.log(this.context);
   }
 
   render() {
     const title = 'React Core, boilerplate app';
     const props = this.props;
+    console.log('MainLayout render');
+    console.log(this.context);
     return (
       <Container>
         <Row>
@@ -50,7 +55,3 @@ export default class MainLayout extends Component<any, void> {
     );
   }
 }
-
-MainLayout.contextTypes = {
-  router: PropTypes.object.isRequired,
-};

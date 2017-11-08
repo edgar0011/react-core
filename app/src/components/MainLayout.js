@@ -41,6 +41,9 @@ export default class MainLayout extends Component<any, any> {
                     <li>
                       <Link to="todo" activeClassName="active" class="nav-item nav-link">Todo</Link>
                     </li>
+                    <li>
+                      <Link to="tags" activeClassName="active" class="nav-item nav-link">Tags</Link>
+                    </li>
                   </ul>
                 </Col>
               </Row>

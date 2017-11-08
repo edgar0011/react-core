@@ -7,8 +7,9 @@ import {
 } from '../config/CONSTANTS';
 
 import UserService from '../dataApi/UserService';
+import type { UserServiceType } from '../dataApi/UserService';
 
-const userService = new UserService();
+const userService:UserServiceType = new UserService();
 
 export function usersLoading() {
   return {
@@ -37,8 +38,10 @@ export function getUsers() {
     return userService.getUsers()
       .then((response) => {
         dispatch(usersLoaded(response.data));
+        return response;
       }, (errors) => {
         dispatch(usersLoadFailed(errors));
+        return errors;
       });
   };
 }

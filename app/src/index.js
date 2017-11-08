@@ -16,6 +16,7 @@ import './styles/main.scss';
 import MainLayout from './components/MainLayout';
 import Todo from './components/todo/Todo';
 import Main from './components/main/Main';
+import Tagger from './components/tag/Tagger';
 import store from './stores/store';
 
 /* global document */
@@ -27,6 +28,7 @@ ReactDOM.render(
       <Route path="/" component={MainLayout}>
         <Route path="main" component={Main} />
         <Route path="todo" component={Todo} />
+        <Route path="tags" component={Tagger} />
       </Route>
     </Router>
   </Provider>

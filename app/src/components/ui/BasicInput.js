@@ -62,10 +62,6 @@ export default class BasicInput extends Component<any, any> {
   render() {
     const { value } = this.state;
     const { type, className, pattern } = this.props;
-    const { dto } = this.context;
-    console.log('BasicInput:');
-    console.log(dto);
-    console.log(this.context);
 
     return (
       <input type={type || 'text'} class={className} onChange={this.onChangeHandler} value={value} pattern={pattern} />

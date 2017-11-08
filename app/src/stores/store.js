@@ -7,8 +7,9 @@ import thunk from 'redux-thunk';
 
 import todoReducer from '../reducers/todoReducer';
 import userReducer from '../reducers/userReducer';
+import tagReducer from '../reducers/tagReducer';
 
-const rootReducer = combineReducers({ todos: todoReducer, users: userReducer });
+const rootReducer = combineReducers({ todos: todoReducer, users: userReducer, tags: tagReducer });
 
 const composeEnhancers =
   /* global window */
@@ -20,7 +21,14 @@ const composeEnhancers =
     }) : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk),
+  applyMiddleware(store => next => (action) => {
+    const state = store.getState();
+    console.log('LOGGING STATE');
+    console.log(state);
+    console.log('LOGGING action');
+    console.log(action);
+    return next(action);
+  }, thunk),
   // other store enhancers if any
 );
 

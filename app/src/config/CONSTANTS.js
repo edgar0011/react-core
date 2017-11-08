@@ -16,3 +16,11 @@ export const USER_LOADING = 'userLoading';
 export const USER_LOAD_FAILED = 'userLoadFailed';
 
 export const REMOVE_USER = 'removeUser';
+
+
+export const ADD_TAG = 'addTag';
+export const REMOVE_TAG = 'removeTag';
+export const GET_TAGS = 'getTags';
+export const GET_TAGS_LOADING = 'getTagsLoading';
+export const GET_TAGS_LOADED = 'getTagsLoaded';
+export const GET_TAGS_LOAD_FAILED = 'getTagsLoadFailed';

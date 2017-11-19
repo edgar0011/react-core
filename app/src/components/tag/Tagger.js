@@ -6,17 +6,29 @@ import { Button, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { memoize } from 'lodash';
-import Select from 'react-select';
+import { Creatable } from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import { pure } from 'recompose';
+import { createSelector } from 'reselect';
 
 import AsyncLoader from '../ui/AsyncLoader';
 import * as tagActions from '../../actions/tagActions';
 
+const rootSelector = state => state.tags;
+const tagsSelector = createSelector(
+  [rootSelector],
+  root => root.tags
+);
+
+const tagsLoadingSelector = createSelector(
+  [rootSelector],
+  root => root.tagsLoading
+);
+
 type tagObjectType = {id:string, value:string, label:string};
 
-@connect(store => ({ tags: store.tags.tags, isLoading: store.tags.tagsLoading }), {
+@connect(store => ({ tags: tagsSelector(store), isLoading: tagsLoadingSelector(store) }), {
   addTag: tagActions.addTag,
   removeTag: tagActions.removeTag,
   getTags: tagActions.getTags,
@@ -57,10 +69,23 @@ export default class Tagger extends PureComponent<any, any> {
 
   loadTags = () => this.props.getTags();
 
-  logChange = (val: tagObjectType) => {
+  changeHandler = (val: tagObjectType) => {
     console.log('Selected: ', val);
     this.setState({ selectedTag: val });
+    return val;
   };
+
+  newOptionHandler = ({ label, labelKey, valueKey }: any) => {
+    console.log('newOptionHandler: ', label);
+    console.log('newOptionHandler: ', labelKey);
+    console.log('newOptionHandler: ', valueKey);
+    return { label, value: label, id: Date.now() };
+  }
+
+  newOptionClickHandler = (options: any) => {
+    console.log('newOptionClickHandler: ', options);
+    this.props.addTag(options.label);
+  }
 
   handleRemoveTagFactory: Function;
 
@@ -103,13 +128,15 @@ export default class Tagger extends PureComponent<any, any> {
           </Row>
           <Row>
             <Col>
-              <Select
+              <Creatable
                 name="form-field-name"
                 value={selectedTag}
                 multi
-                options={tags.map(tag => ({ value: tag.value, label: tag.label, id: tag.id }))}
-                onChange={this.logChange}
+                options={tags}
+                onChange={this.changeHandler}
                 optionRenderer={this.renderOption}
+                newOptionCreator={this.newOptionHandler}
+                onNewOptionClick={this.newOptionClickHandler}
               />
             </Col>
           </Row>

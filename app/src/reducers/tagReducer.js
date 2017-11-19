@@ -6,14 +6,16 @@ export default function tagReducer(state = { tags: [], tagsLoading: false }, act
   const { type, payload } = action;
   switch (type) {
     case ADD_TAG: {
-      const newTag = { value: action.payload, id: shortid.generate() };
+      const newTag = {
+        value: action.payload.text, label: action.payload.text, id: shortid.generate() };
       return {
         ...state, tags: [...state.tags, newTag],
       };
     }
 
     case GET_TAGS_LOADED: {
-      const newTags = action.payload.map(tag => ({ value: tag, id: shortid.generate() }));
+      const newTags = action.payload.map(
+        tag => ({ value: tag, label: tag, id: shortid.generate() }));
       return {
         ...state, tags: [...state.tags, ...newTags], tagsLoading: false,
       };

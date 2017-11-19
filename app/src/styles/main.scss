@@ -178,3 +178,50 @@ ul.rc-list {
 .paddRightReset {
   padding-right: 0 !important;
 }
+
+@import '../../../node_modules/font-awesome/scss/font-awesome.scss';
+
+@mixin faRotate($deg: 90){
+  $sDeg: #{$deg}deg;
+  -webkit-transform: rotate($sDeg);
+  -moz-transform: rotate($sDeg);
+  -ms-transform: rotate($sDeg);
+  -o-transform: rotate($sDeg);
+  transform: rotate($sDeg);
+}
+
+.fa-rotate-45 {
+  @include faRotate(45);
+}
+
+@-webkit-keyframes loaderAnimation {
+  0%   { @include faRotate(0); }
+  100% { @include faRotate(360); }
+}
+@-moz-keyframes loaderAnimation {
+  0%   { @include faRotate(0); }
+  100% { @include faRotate(360); }
+}
+@-o-keyframes loaderAnimation {
+  0%   { @include faRotate(0); }
+  100% { @include faRotate(360); }
+}
+@keyframes loaderAnimation {
+  0%   { @include faRotate(0); }
+  100% { @include faRotate(360); }
+}
+
+.loader {
+  @extend .fa;
+  @extend .fa-clock-o;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  left: -15px;
+  top: -15px;
+
+  -webkit-animation: loaderAnimation 2s infinite; /* Safari 4+ */
+  -moz-animation:    loaderAnimation 2s infinite; /* Fx 5+ */
+  -o-animation:      loaderAnimation 2s infinite; /* Opera 12+ */
+  animation:         loaderAnimation 2s infinite; /* IE 10+, Fx 29+ */
+}

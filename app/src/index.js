@@ -9,7 +9,7 @@ import { Router, Route, Redirect, hashHistory } from 'react-router';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootswatch/cosmo/bootstrap.css';
-import 'font-awesome/css/font-awesome.css';
+// import 'font-awesome/scss/font-awesome.scss';
 import './styles/bootstrap-override.scss';
 import './styles/main.scss';
 

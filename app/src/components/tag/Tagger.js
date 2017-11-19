@@ -1,7 +1,7 @@
 
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Button, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -11,16 +11,18 @@ import 'react-select/dist/react-select.css';
 
 import { pure } from 'recompose';
 
+import AsyncLoader from '../ui/AsyncLoader';
 import * as tagActions from '../../actions/tagActions';
 
 type tagObjectType = {id:string, value:string, label:string};
 
-@connect(store => store.tags, {
+@connect(store => ({ tags: store.tags.tags, isLoading: store.tags.tagsLoading }), {
   addTag: tagActions.addTag,
   removeTag: tagActions.removeTag,
   getTags: tagActions.getTags,
 })
-export default class Tagger extends Component<any, any> {
+@AsyncLoader
+export default class Tagger extends PureComponent<any, any> {
   static defaultProps = {
     tags: [],
   };
@@ -30,6 +32,7 @@ export default class Tagger extends Component<any, any> {
     addTag: PropTypes.func,
     removeTag: PropTypes.func,
     getTags: PropTypes.func,
+    isLoading: PropTypes.bool,
   };
 
   constructor(props: any, context: any) {

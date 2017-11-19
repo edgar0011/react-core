@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         test: /\.css?$/,
-        loader: ['style-loader', 'css-loader'],
+        loader: ['style-loader', 'css-loader', 'resolve-url-loader'],
       },
       /*{
         test: /\.scss?$/,
@@ -52,6 +52,9 @@ module.exports = {
               options: {
                 sourceMap: true,
               },
+            },
+            {
+              loader: 'resolve-url-loader'
             },
             {
               loader: 'sass-loader',
@@ -73,7 +76,7 @@ module.exports = {
         use: 'url-loader?limit=10000&mimetype=application/octet-stream',
       }, {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader',
+        use: 'url-loader?limit=10000&mimetype=application/font-eot',
       }, {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: 'url-loader?limit=10000&mimetype=image/svg+xml',

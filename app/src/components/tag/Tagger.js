@@ -10,7 +10,7 @@ import { Creatable } from 'react-select';
 import 'react-select/dist/react-select.css';
 
 import { pure } from 'recompose';
-import { createSelector } from 'reselect';
+import { createSelector, createStructuredSelector } from 'reselect';
 
 import AsyncLoader from '../ui/AsyncLoader';
 import * as tagActions from '../../actions/tagActions';
@@ -21,6 +21,11 @@ const tagsSelector = createSelector(
   root => root.tags
 );
 
+const tagsAselector = createSelector(
+  [tagsSelector],
+  tags => tags.filter(({ value }) => value.substr(0, 1).toLowerCase() === 'a')
+);
+
 const tagsLoadingSelector = createSelector(
   [rootSelector],
   root => root.tagsLoading
@@ -28,7 +33,9 @@ const tagsLoadingSelector = createSelector(
 
 type tagObjectType = {id:string, value:string, label:string};
 
-@connect(store => ({ tags: tagsSelector(store), isLoading: tagsLoadingSelector(store) }), {
+@connect(createStructuredSelector({
+  tags: tagsSelector, tagsA: tagsAselector, isLoading: tagsLoadingSelector
+}), {
   addTag: tagActions.addTag,
   removeTag: tagActions.removeTag,
   getTags: tagActions.getTags,
@@ -101,7 +108,7 @@ export default class Tagger extends PureComponent<any, any> {
 
   render() {
     const title = 'Tags';
-    const { tags } = this.props;
+    const { tags, tagsA } = this.props;
     const { selectedTag, newTag } = this.state;
     const tagNodes = tags.map(tag => (
       <li class="list-group-item" key={`tag${tag.id}`}>
@@ -111,7 +118,7 @@ export default class Tagger extends PureComponent<any, any> {
         </span>
       </li>
     ));
-
+    console.log('tagsA', tagsA);
     return (
       <Row>
         <Col>

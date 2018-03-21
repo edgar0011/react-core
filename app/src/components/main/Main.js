@@ -10,7 +10,7 @@ import { User } from '../user/User';
 import * as usersActions from '../../actions/usersActions';
 
 @connect((store) => {
-  console.log(store.dispatch);
+  console.log('main store.dispatch', store.dispatch);
   const { users } = store;
   return { users };
 }, { getUsers: usersActions.getUsers,

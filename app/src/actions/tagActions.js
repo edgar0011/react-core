@@ -43,16 +43,16 @@ export function tagsLoadFailed(errors:any) {
 }
 
 export function getTags(words:number = 1, num:number = 200) {
-  return (dispatch:Function) => {
+  return async (dispatch:Function, getState:() => any) => {
     dispatch(tagsLoading());
-
-    return tagService.getTags(words, num)
-      .then((response) => {
-        dispatch(tagsLoaded(response.data.result));
-        return response;
-      }, (errors) => {
-        dispatch(tagsLoadFailed(errors));
-        return errors;
-      });
+    console.log(getState());
+    try {
+      const response = await tagService.getTags(words, num);
+      dispatch(tagsLoaded(response.data.result));
+      return response;
+    } catch (errors) {
+      dispatch(tagsLoadFailed(errors));
+      return errors;
+    }
   };
 }

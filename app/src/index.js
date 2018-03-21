@@ -7,9 +7,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, Redirect, hashHistory } from 'react-router';
 
+import 'babel-polyfill';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootswatch/cosmo/bootstrap.css';
-// import 'font-awesome/scss/font-awesome.scss';
+import 'font-awesome/scss/font-awesome.scss';
 import './styles/bootstrap-override.scss';
 import './styles/main.scss';
 
@@ -26,9 +28,9 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Redirect from="/" to="main" />
       <Route path="/" component={MainLayout}>
-        <Route path="main" component={Main} />
-        <Route path="todo" component={Todo} />
-        <Route path="tags" component={Tagger} />
+        <Route path="main" exact component={Main} />
+        <Route path="todo" exact component={Todo} />
+        <Route path="tags" exact component={Tagger} />
       </Route>
     </Router>
   </Provider>

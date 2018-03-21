@@ -14,15 +14,17 @@ import { createSelector, createStructuredSelector } from 'reselect';
 
 import AsyncLoader from '../ui/AsyncLoader';
 import * as tagActions from '../../actions/tagActions';
-
+// selectors
 const rootSelector = state => state.tags;
+const rootSelector2 = state => state.tags;
+
 const tagsSelector = createSelector(
-  [rootSelector],
-  root => root.tags
+  [rootSelector, rootSelector2],
+  root => root.tags,
 );
 
 const tagsAselector = createSelector(
-  [tagsSelector],
+  [tagsSelector, rootSelector],
   tags => tags.filter(({ value }) => value.substr(0, 1).toLowerCase() === 'a')
 );
 

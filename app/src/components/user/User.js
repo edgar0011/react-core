@@ -7,15 +7,20 @@ import PropTypes from 'prop-types';
 export class User extends React.Component {
   // getChildContext serves as the initializer for our context values
   getChildContext() {
+    const t = this.state ? this.state.clicked : null;
     return {
       favColor: '#f8c483',
-      userName: 'James Ipsum',
+      userName: `James Ipsum ${t}`,
     };
   }
 
   render() {
     return (
       <div>
+        <button onClick={() => {
+          this.setState({ clicked: Date.now() });
+        }}
+        >CLICK ME</button>
         <Usercard />
       </div>
     );
@@ -45,7 +50,7 @@ export class UserInfo extends React.Component {
   // We can make use of these context values...
   render() {
     return (
-      <h2>{this.context.userName}</h2>
+      <h2>USER: {this.context.userName}</h2>
     );
   }
 }

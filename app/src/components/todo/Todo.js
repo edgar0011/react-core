@@ -48,7 +48,7 @@ export default class Todo extends Component<any, any> {
       return newValue ? val2strNornalized : '';
     }];
 
-    // fbService();
+    fbService();
   }
 
   onChangeHandler = () => {
@@ -66,7 +66,7 @@ export default class Todo extends Component<any, any> {
     this.setState({ textBasicInputValue: null, inputPlaceHolder: 'Hello' });
   };
 
-  handleRemoveTodo = (index:number) => {
+  handleRemoveTodo = (index: number) => {
     const { todos } = this.props.todos;
     this.props.removeTodo(todos[index].id);
   };

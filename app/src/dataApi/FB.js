@@ -3,6 +3,7 @@
 /* global window */
 
 export function fbLoaded() {
+  // debugger
   return new Promise((resolve, reject) => {
     function resolver() {
       if (global.FB || window.FB) {
@@ -29,6 +30,7 @@ export function fbLoaded() {
 }
 
 export default function fbService() {
+  // debugger
   function callApi(token, path = '/me', fields = 'id,picture,email,link,name,photos,events,posts,friends') {
     return new Promise((resolve, reject) => {
       FB.api(path, 'GET', { access_token: token, fields }, (responseApi) => {
@@ -52,10 +54,12 @@ export default function fbService() {
   }
 
   function callAPis(token) {
+    // debugger
     return Promise.all([
       callApi(token),
-      callApi(token, '/me/photos', ''),
+      // hangecallApi(token, '/me/photos', ''),
       callApi(token, '/me/photos/uploaded', ''),
+      // callApi(token, '/567694996926482', 'access_token'),
     ]).then((response) => {
       console.log('me');
       console.log(response[0]);
@@ -86,7 +90,9 @@ export default function fbService() {
         const accessToken = loginStatusResponse.authResponse.accessToken;
         callAPis(accessToken);
       } else {
+        // debugger
         FB.login((response) => {
+          // debugger
           if (response.authResponse) {
             console.log(`Access Token: ${response.authResponse.accessToken}`);
             const accessToken = response.authResponse.accessToken;
@@ -95,7 +101,7 @@ export default function fbService() {
             console.log('User cancelled login or did not fully authorize.');
           }
         }, {
-          scope: 'publish_actions,public_profile,email,user_photos,user_posts,user_events,user_friends',
+          scope: 'publish_actions,public_profile,email,user_photos,user_posts,user_events,user_friends,manage_pages,publish_pages',
           return_scopes: true,
         });
       }

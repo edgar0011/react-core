@@ -1,8 +1,10 @@
 [ignore]
-esproposal.decorators=ignore
+esproposal.decorators
 [include]
 
 [libs]
+../node_modules
+./flow-typed
 
 [lints]
 

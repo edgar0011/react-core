@@ -4,9 +4,10 @@ import { Row, Col } from 'reactstrap';
 
 import PropTypes from 'prop-types';
 
-import { Usercard } from '../user/User';
+import { UserCard } from '../user/User';
 
 export default class TodoCard extends Component<any, any> {
+  // eslint-disable-next-line
   constructor(props: any, context: any) {
     super(props, context);
     console.log('TodoCard');
@@ -25,7 +26,7 @@ export default class TodoCard extends Component<any, any> {
     return (
       <Row>
         <Col>
-          <Usercard />
+          <UserCard />
         </Col>
       </Row>
     );

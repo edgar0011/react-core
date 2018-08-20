@@ -6,11 +6,15 @@ import { Button, Col, Row } from 'reactstrap';
 import Collapse from 'react-collapse';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { memoize } from 'lodash';
+
 import { User } from '../user/User';
 import * as usersActions from '../../actions/usersActions';
 
 @connect((store) => {
   console.log('main store.dispatch', store.dispatch);
+  console.log('main store', store);
   const { users } = store;
   return { users };
 }, { getUsers: usersActions.getUsers,
@@ -24,7 +28,9 @@ export default class Main extends Component<any, any> {
     user: PropTypes.object,
     users: PropTypes.object,
   };
-
+  static contextTypes = {
+    store: PropTypes.object
+  };
   constructor(props: any, context: any) {
     super(props, context);
     console.log('Main');
@@ -35,7 +41,13 @@ export default class Main extends Component<any, any> {
       iterations: 0,
       userDetailOpened: false,
     };
+
+    this.memoizedHandleUserClick = memoize(this.handleUserClick);
+    this.memoizedHandleRemoveUser = memoize(this.handleRemoveUser);
   }
+
+  memoizedHandleUserClick: Function
+  memoizedHandleRemoveUser: Function
 
   handleClick = () => {
     const state = this.state;
@@ -55,8 +67,9 @@ export default class Main extends Component<any, any> {
     this.props.getUsers();
   };
 
-  handleUserClick(user:{id:number}) {
-    this.props.getUser(user.id).then((response) => {
+  handleUserClick = (userId: number) => (event: SyntheticEvent<any>) => {
+    event.preventDefault();
+    this.props.getUser(userId).then((response) => {
       console.log('handleUserClick ', response);
       const state = this.state;
       this.setState({ ...state, userDetailOpened: true });
@@ -65,11 +78,14 @@ export default class Main extends Component<any, any> {
     });
   }
 
-  hideUserDetail():void {
+  hideUserDetail = (): void => {
     this.setState({ userDetailOpened: false });
   }
 
-  handleRemoveUser = (id:number) => {
+  handleRemoveUser = (id: number) => (event: SyntheticEvent<any>) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     if (this.props.users.user && this.props.users.user.id === id) {
       this.hideUserDetail();
     }
@@ -91,10 +107,7 @@ export default class Main extends Component<any, any> {
           <a
             href="#"
             role="menu"
-            onClick={(event) => {
-              event.preventDefault();
-              this.handleUserClick(user);
-            }}
+            onClick={this.memoizedHandleUserClick(user.id)}
           >
             <span class="float-left" >
               {user.name}
@@ -104,11 +117,7 @@ export default class Main extends Component<any, any> {
             <span class="float-right">
               <Button
                 color="danger"
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  this.handleRemoveUser(user.id);
-                }}
+                onClick={this.memoizedHandleRemoveUser(user.id)}
               >
                 Remove
               </Button>
@@ -172,9 +181,7 @@ export default class Main extends Component<any, any> {
               {userMetadata}
               <button
                 class="btn btn-info"
-                onClick={() => {
-                  this.hideUserDetail();
-                }}
+                onClick={this.hideUserDetail}
               >Close</button>
             </Collapse>
           </Col>

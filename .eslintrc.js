@@ -1,12 +1,18 @@
 module.exports = {
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "eslint:recommended",
+    "plugin:flowtype/recommended"
+  ],
   "plugins": [
    "react",
+    "babel",
    "flowtype"
   ],
   "parser": "babel-eslint",
   "rules": {
     "strict": 2,
+    "semi": 0,
     "quotes": 2,
     "no-unused-vars": 2,
     "camelcase": 2,

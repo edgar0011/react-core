@@ -1,5 +1,6 @@
 dist
 node_modules
+flow-typed
 vcs.xml
 .idea
 npm-debug.log

@@ -10,6 +10,7 @@ export default function AsyncLoader(Content) {
 
     render() {
       const { isLoading } = this.props;
+      // debugger
       return (
         <div>
           {isLoading && <div style={{

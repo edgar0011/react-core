@@ -23,7 +23,7 @@ const tagsSelector = createSelector(
   root => root.tags,
 );
 
-const tagsAselector = createSelector(
+const tagsAselector: Function = createSelector(
   [tagsSelector, rootSelector],
   tags => tags.filter(({ value }) => value.substr(0, 1).toLowerCase() === 'a')
 );
@@ -33,11 +33,14 @@ const tagsLoadingSelector = createSelector(
   root => root.tagsLoading
 );
 
-type tagObjectType = {id:string, value:string, label:string};
-
-@connect(createStructuredSelector({
+type tagObjectType = {id: string, value: string, label: string};
+const cc = createStructuredSelector({
   tags: tagsSelector, tagsA: tagsAselector, isLoading: tagsLoadingSelector
-}), {
+});
+@connect((state) => {
+  const pp = cc(state);
+  return pp;
+}, {
   addTag: tagActions.addTag,
   removeTag: tagActions.removeTag,
   getTags: tagActions.getTags,
@@ -68,7 +71,7 @@ export default class Tagger extends PureComponent<any, any> {
     this.props.removeTag(tag);
   }
 
-  handleInput = (event:{name: string, value: string | number}) => {
+  handleInput = (event: {name: string, value: string | number}) => {
     this.setState({ [event.name]: event.value });
   };
 
@@ -161,7 +164,7 @@ export default class Tagger extends PureComponent<any, any> {
 }
 
 
-const Tag = ({ tag, onClick }: { tag:{value:string, id:string}, onClick: Function }) => {
+const Tag = ({ tag, onClick }: { tag: {value: string, id: string}, onClick: Function }) => {
   console.log('rendering Tag', tag);
   return (
     <span

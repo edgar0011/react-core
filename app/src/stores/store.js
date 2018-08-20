@@ -9,7 +9,9 @@ import todoReducer from '../reducers/todoReducer';
 import userReducer from '../reducers/userReducer';
 import tagReducer from '../reducers/tagReducer';
 
-const rootReducer = combineReducers({ todos: todoReducer, users: userReducer, tags: tagReducer });
+const combinedReducers = combineReducers({ todos: todoReducer, users: userReducer, tags: tagReducer });
+
+const rootReducer = (state, action) => combinedReducers(state, action);
 
 const composeEnhancers =
   /* global window */

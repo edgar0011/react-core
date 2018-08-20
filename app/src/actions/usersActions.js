@@ -17,14 +17,14 @@ export function usersLoading() {
   };
 }
 
-export function usersLoaded(users:Array<any>) {
+export function usersLoaded(users: Array<any>) {
   return {
     type: USERS_LOADED,
     payload: users,
   };
 }
 
-export function usersLoadFailed(errors:any) {
+export function usersLoadFailed(errors: any) {
   return {
     type: USERS_LOAD_FAILED,
     payload: errors,
@@ -32,17 +32,17 @@ export function usersLoadFailed(errors:any) {
 }
 
 export function getUsers() {
-  return (dispatch:Function) => {
+  return async (dispatch: Function) => {
     dispatch(usersLoading());
 
-    return userService.getUsers()
-      .then((response) => {
-        dispatch(usersLoaded(response.data));
-        return response;
-      }, (errors) => {
-        dispatch(usersLoadFailed(errors));
-        return errors;
-      });
+    try {
+      const response = await userService.getUsers()
+      dispatch(usersLoaded(response.data));
+      return response;
+    } catch (error) {
+      dispatch(usersLoadFailed(error));
+      return error;
+    }
   };
 }
 
@@ -52,36 +52,36 @@ export function userLoading() {
   };
 }
 
-export function userLoaded(user:any) {
+export function userLoaded(user: any) {
   return {
     type: USER_LOADED,
     payload: user,
   };
 }
 
-export function userLoadFailed(errors:any) {
+export function userLoadFailed(errors: any) {
   return {
     type: USER_LOAD_FAILED,
     payload: errors,
   };
 }
 
-export function getUser(id:any) {
-  return (dispatch:Function) => {
+export function getUser(id: any) {
+  return async (dispatch: Function) => {
     dispatch(userLoading());
 
-    return userService.getUser(id)
-      .then((response) => {
-        dispatch(userLoaded(response.data));
-        return response;
-      }, (errors) => {
-        dispatch(userLoadFailed(errors));
-        return errors;
-      });
+    try {
+      const response = await userService.getUser(id)
+      dispatch(userLoaded(response.data));
+      return response;
+    } catch (error) {
+      dispatch(userLoadFailed(error));
+      return error;
+    }
   };
 }
 
-export function removeUser(id:any) {
+export function removeUser(id: any) {
   return {
     type: REMOVE_USER,
     payload: id,

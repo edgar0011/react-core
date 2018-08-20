@@ -14,14 +14,24 @@ export class User extends React.Component {
     };
   }
 
+  handleUser = () => {
+    console.log('User handleUser', this);
+    // debugger;
+  }
+
   render() {
+    const { ...props } = this.props
     return (
       <div>
         <button onClick={() => {
           this.setState({ clicked: Date.now() });
         }}
         >CLICK ME</button>
-        <Usercard />
+        <UserCard
+          handleUser={this.handleUser}
+          {...props}
+
+        />
       </div>
     );
   }
@@ -34,17 +44,21 @@ User.childContextTypes = {
   userName: PropTypes.string,
 };
 
-export class Usercard extends React.Component {
-  // Note that the Usercard component makes no use of context
+export class UserCard extends React.Component {
+  // Note that the UserCard component makes no use of context
   render() {
+    const { handleUser } = this.props
     return (
-      <div className="usercard">
+      <div className="usercard" tabIndex="0" role='button' onClick={handleUser}>
         <UserIcon />
         <UserInfo />
       </div>
     );
   }
 }
+UserCard.propTypes = {
+  handleUser: PropTypes.func
+};
 
 export class UserInfo extends React.Component {
   // We can make use of these context values...

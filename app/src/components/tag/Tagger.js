@@ -9,6 +9,8 @@ import { memoize } from 'lodash';
 import { Creatable } from 'react-select';
 import 'react-select/dist/react-select.css';
 
+import Raven from 'raven-js'
+
 import { pure } from 'recompose';
 import { createSelector, createStructuredSelector } from 'reselect';
 
@@ -69,6 +71,8 @@ export default class Tagger extends PureComponent<any, any> {
 
   handleRemoveTag = (tag: String) => () => {
     this.props.removeTag(tag);
+
+    Raven.captureException(error)
   }
 
   handleInput = (event: {name: string, value: string | number}) => {

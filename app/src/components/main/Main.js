@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 
 import { memoize } from 'lodash';
 
+import Raven from 'raven-js';
+
 import { User } from '../user/User';
 import * as usersActions from '../../actions/usersActions';
 
@@ -64,6 +66,12 @@ export default class Main extends Component<any, any> {
       iterations: state ? ++state.iterations : 0,
     })); */
 
+    try {
+      throw new Error('ReactCore sample error, handleClick');
+    } catch(error) {
+      Raven.captureException(error)
+    }
+
     this.props.getUsers();
   };
 
@@ -80,6 +88,7 @@ export default class Main extends Component<any, any> {
 
   hideUserDetail = (): void => {
     this.setState({ userDetailOpened: false });
+    throw new Error('ReactCore sample error, handleUserClick');
   }
 
   handleRemoveUser = (id: number) => (event: SyntheticEvent<any>) => {

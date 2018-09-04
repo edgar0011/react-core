@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, Redirect, hashHistory } from 'react-router';
+import Raven from 'raven-js';
 
 import 'babel-polyfill';
 
@@ -20,6 +21,10 @@ import Todo from './components/todo/Todo';
 import Main from './components/main/Main';
 import Tagger from './components/tag/Tagger';
 import store from './stores/store';
+
+Raven
+  .config('https://dc9efafe120a415dbfbc2beb4b23691a@sentry.io/1270389')
+  .install();
 
 /* global document */
 const app = document.getElementById('app');

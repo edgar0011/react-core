@@ -72,7 +72,7 @@ export default class Tagger extends PureComponent<any, any> {
   handleRemoveTag = (tag: String) => () => {
     this.props.removeTag(tag);
 
-    Raven.captureException(error)
+    Raven.captureMessage('ReactCore, Tagger, Some info')
   }
 
   handleInput = (event: {name: string, value: string | number}) => {

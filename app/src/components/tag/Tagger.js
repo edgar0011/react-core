@@ -36,6 +36,15 @@ const tagsLoadingSelector = createSelector(
 );
 
 type tagObjectType = {id: string, value: string, label: string};
+
+type Props = {
+  tags: Array<{ id: string, value: string }>,
+  tagsA: Array<string>,
+  addTag: Function,
+  removeTag: Function,
+  getTags: Function,
+  isLoading: boolean,
+}
 const cc = createStructuredSelector({
   tags: tagsSelector, tagsA: tagsAselector, isLoading: tagsLoadingSelector
 });
@@ -48,18 +57,18 @@ const cc = createStructuredSelector({
   getTags: tagActions.getTags,
 })
 @AsyncLoader
-export default class Tagger extends PureComponent<any, any> {
+export default class Tagger extends PureComponent<Props, any> {
   static defaultProps = {
     tags: [],
   };
 
-  static propTypes = {
+  /*static propTypes = {
     tags: PropTypes.array,
     addTag: PropTypes.func,
     removeTag: PropTypes.func,
     getTags: PropTypes.func,
     isLoading: PropTypes.bool,
-  };
+  };*/
 
   constructor(props: any, context: any) {
     super(props, context);
@@ -68,6 +77,8 @@ export default class Tagger extends PureComponent<any, any> {
 
     this.handleRemoveTagFactory = memoize(this.handleRemoveTag);
   }
+
+  props: Props
 
   handleRemoveTag = (tag: String) => () => {
     this.props.removeTag(tag);

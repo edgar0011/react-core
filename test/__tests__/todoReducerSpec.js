@@ -1,8 +1,8 @@
 
 import { expect, assert } from 'chai';
 
-import todoReducer from '../app/src/reducers/todoReducer';
-import { ADD_TODO, REMOVE_TODO } from '../app/src/config/CONSTANTS';
+import todoReducer from '../../app/src/reducers/todoReducer';
+import { ADD_TODO, REMOVE_TODO } from '../../app/src/config/CONSTANTS';
 
 describe('reducer', () => {
   describe('ADD_TODO', () => {

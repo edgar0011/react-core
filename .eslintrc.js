@@ -9,6 +9,9 @@ module.exports = {
     "babel",
    "flowtype"
   ],
+  "env": {
+    "jest": true
+  },
   "parser": "babel-eslint",
   "rules": {
     "strict": 2,

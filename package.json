@@ -19,7 +19,7 @@
     "precommit": "yarn run flow && yarn run lint"
   },
   "engines": {
-    "node": ">=9.0"
+    "node": "10.12.0"
   },
   "engineStrict": true,
   "author": "martin.weiser@gmail.com",

@@ -19,14 +19,13 @@ export class User extends React.Component {
     // debugger;
   }
 
+  clickHandler = () => this.setState({ clicked: Date.now() })
+
   render() {
     const { ...props } = this.props
     return (
       <div>
-        <button onClick={() => {
-          this.setState({ clicked: Date.now() });
-        }}
-        >CLICK ME</button>
+        <button onClick={this.clickHandler}>CLICK ME</button>
         <UserCard
           handleUser={this.handleUser}
           {...props}

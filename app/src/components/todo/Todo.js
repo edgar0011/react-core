@@ -6,6 +6,7 @@ import { Button, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { dom } from 'flow';
+import { memoize } from 'lodash';
 
 import BasicInput from '../ui/BasicInput';
 import * as addTodoActions from '../../actions/todoActions';
@@ -48,6 +49,8 @@ export default class Todo extends Component<any, any> {
       return newValue ? val2strNornalized : '';
     }];
 
+    this.memoizedHandleRemoveTodo = memoize(this.handleRemoveTodo)
+
     fbService();
   }
 
@@ -66,13 +69,18 @@ export default class Todo extends Component<any, any> {
     this.setState({ textBasicInputValue: null, inputPlaceHolder: 'Hello' });
   };
 
-  handleRemoveTodo = (index: number) => {
+  handleRemoveTodo = (index: number) => () => {
     const { todos } = this.props.todos;
     this.props.removeTodo(todos[index].id);
   };
 
+
+  refHandlertextBasicInput = (input: dom.HTMLInputElement) => {
+    this.textBasicInput = input
+  }
   formatters: any;
   textBasicInput: dom.HTMLInputElement;
+  memoizedHandleRemoveTodo: Function
 
   render() {
     const title = 'Todo';
@@ -87,7 +95,7 @@ export default class Todo extends Component<any, any> {
             role="menuItem"
             class="fa fa-remove"
             style={{ color: '#666', fontSize: '120%', cursor: 'pointer' }}
-            onClick={() => this.handleRemoveTodo(index)}
+            onClick={this.memoizedHandleRemoveTodo(index)}
           />
         </span>
       </li>
@@ -103,7 +111,7 @@ export default class Todo extends Component<any, any> {
             <Col class="col-sm-6">
               <div>
                 <BasicInput
-                  ref={(input) => { this.textBasicInput = input; }}
+                  ref={this.refHandlertextBasicInput}
                   onChangeHandler={this.onChangeHandler}
                   changeBounce={100}
                   value={this.state.inputPlaceHolder}

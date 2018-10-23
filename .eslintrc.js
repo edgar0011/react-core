@@ -28,6 +28,7 @@ module.exports = {
     "react/no-unknown-property": [2, { "ignore": ["class", "for"] }],
     "react/require-default-props": 0,
     "react/forbid-prop-types": [0, { "forbid": ['array', 'object'] }],
-    "class-methods-use-this": 0
+    "class-methods-use-this": 0,
+    "react/jsx-no-bind":  [2, {}]
   }
 };

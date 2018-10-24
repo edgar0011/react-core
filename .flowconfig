@@ -1,12 +1,15 @@
 [ignore]
-esproposal.decorators
+node_modules
+flow-typed
+
 [include]
+app/src
 
 [libs]
-../node_modules
-./flow-typed
+flow-typed
 
 [lints]
+deprecated-call-syntax=off
 
 [options]
 esproposal.decorators=ignore

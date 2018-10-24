@@ -6,11 +6,9 @@ import { Link } from 'react-router';
 
 import { Container, Row, Col } from 'reactstrap';
 
-import PropTypes from 'prop-types';
-
 export default class MainLayout extends Component<any, any> {
   static contextTypes: {
-    router: PropTypes.func.isRequired,
+    router: Function,
   };
 
   constructor(props: any, context: any) {

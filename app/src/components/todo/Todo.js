@@ -17,16 +17,17 @@ import TodoCard from './TodoCard';
 /* eslint no-unused-vars:0 */
 import fbService from '../../dataApi/FB';
 
+type Props = {
+  todos: { todos: Array<{ id: string, todo: any }> },
+  addTodo: Function,
+  removeTodo: Function,
+}
+
 @connect((store) => {
   const { todos } = store;
   return { todos };
 }, { addTodo: addTodoActions.addTodo, removeTodo: addTodoActions.removeTodo })
-export default class Todo extends Component<any, any> {
-  static propTypes = {
-    todos: PropTypes.object,
-    addTodo: PropTypes.func,
-    removeTodo: PropTypes.func,
-  };
+export default class Todo extends Component<Props, any> {
 
   constructor(props: any, context: any) {
     super(props, context);
@@ -81,6 +82,7 @@ export default class Todo extends Component<any, any> {
   formatters: any;
   textBasicInput: dom.HTMLInputElement;
   memoizedHandleRemoveTodo: Function
+  props: Props
 
   render() {
     const title = 'Todo';

@@ -1,0 +1,2 @@
+export HeadlessComponentBase from './HeadlessComponentBase'
+

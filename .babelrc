@@ -7,9 +7,9 @@
     "flow"
   ],
   "plugins": [
+    "flow-react-proptypes",
     "transform-class-properties",
     "transform-decorators-legacy",
-    "flow-react-proptypes",
     "transform-react-jsx",
     "transform-flow-strip-types",
     "transform-object-assign",

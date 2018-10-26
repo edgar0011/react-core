@@ -48,7 +48,7 @@ export class UserCard extends React.Component {
   render() {
     const { handleUser } = this.props
     return (
-      <div className="usercard" tabIndex="0" role='button' onClick={handleUser}>
+      <div className='usercard' tabIndex='0' role='button' onClick={handleUser}>
         <UserIcon />
         <UserInfo />
       </div>
@@ -78,7 +78,7 @@ export class UserIcon extends React.Component {
   render() {
     return (
       <div
-        className="circle"
+        className='circle'
         style={{
           width: '200px',
           height: '200px',

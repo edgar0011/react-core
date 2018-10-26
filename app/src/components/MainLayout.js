@@ -28,19 +28,19 @@ export default class MainLayout extends Component<any, any> {
       <Container>
         <Row>
           <Col>
-            <div class="jumbotron">
+            <div class='jumbotron'>
               <h1>{title}</h1>
               <Row>
                 <Col>
-                  <ul class=" nav justify-content-center">
+                  <ul class=' nav justify-content-center'>
                     <li>
-                      <Link to="main" activeClassName="active" class="nav-item nav-link">Main</Link>
+                      <Link to='main' activeClassName='active' class='nav-item nav-link'>Main</Link>
                     </li>
                     <li>
-                      <Link to="todo" activeClassName="active" class="nav-item nav-link">Todo</Link>
+                      <Link to='todo' activeClassName='active' class='nav-item nav-link'>Todo</Link>
                     </li>
                     <li>
-                      <Link to="tags" activeClassName="active" class="nav-item nav-link">Tags</Link>
+                      <Link to='tags' activeClassName='active' class='nav-item nav-link'>Tags</Link>
                     </li>
                   </ul>
                 </Col>

@@ -101,7 +101,8 @@ export default function fbService() {
             console.log('User cancelled login or did not fully authorize.');
           }
         }, {
-          scope: 'publish_actions,public_profile,email,user_photos,user_posts,user_events,user_friends,manage_pages,publish_pages',
+          scope: 'publish_actions,public_profile,email,' +
+          'user_photos,user_posts,user_events,user_friends,manage_pages,publish_pages',
           return_scopes: true,
         });
       }

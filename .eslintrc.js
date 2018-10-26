@@ -1,34 +1,85 @@
 module.exports = {
+  "parser": "babel-eslint",
   "extends": [
     "airbnb",
     "eslint:recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:flowtype/recommended"
   ],
   "plugins": [
-   "react",
     "babel",
-   "flowtype"
+    "flowtype",
+    "react",
+    "promise"
   ],
   "env": {
+    "browser": true,
     "jest": true
   },
-  "parser": "babel-eslint",
+  "globals": {
+    "describe": true,
+    "test": true,
+    "expect": true,
+    "it": true,
+    "SyntheticEvent": true,
+    "SyntheticKeyboardEvent": true,
+    "SyntheticMouseEvent": true,
+    "SyntheticTouchEvent": true
+  },
   "rules": {
-    "strict": 2,
+    "no-console": "off",
+    "arrow-parens": "off",
+    "no-shadow": "off",
+    "no-unused-expressions": "off",
+    "no-useless-constructor": "off",
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
+    "max-len": [
+      "error",
+      120,
+      2
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "prop-types": "off",
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/prop-types": "off",
+    "react/forbid-prop-types": "off",
+    "react/require-default-props": "off",
     "semi": 0,
-    "quotes": 2,
-    "no-unused-vars": 2,
-    "camelcase": 2,
-    "no-underscore-dangle": 2,
-    "no-console": 0,
-    "no-plusplus": 0,
-    "no-debugger": 2,
-    "comma-dangle": ["error", "only-multiline"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/no-unknown-property": [2, { "ignore": ["class", "for"] }],
-    "react/require-default-props": 0,
-    "react/forbid-prop-types": [0, { "forbid": ['array', 'object'] }],
-    "class-methods-use-this": 0,
-    "react/jsx-no-bind":  [2, {}]
+    "react/jsx-no-bind": [
+      "error",
+      {
+        "ignoreRefs": false,
+        "allowArrowFunctions": false,
+        "allowBind": false
+      }
+    ],
+    "react/no-unknown-property": [2, {"ignore": ["class", "for"]}],
+    "object-curly-newline": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "jsx-a11y/click-events-have-key-events": 1,
+    "react/no-multi-comp": 0
   }
-};
+}

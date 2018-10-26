@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default function AsyncLoader(Content) {
+export default function(Content) {
   /* eslint react/prefer-stateless-function: 0 */
   return class extends PureComponent {
     static propTypes = {
@@ -23,7 +23,7 @@ export default function AsyncLoader(Content) {
           }}
           >
             <span
-              class="loader"
+              class='loader'
               style={{
                 position: 'absolute',
                 fontSize: '30px',

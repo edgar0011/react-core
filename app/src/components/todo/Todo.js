@@ -14,6 +14,9 @@ import TODOS from '../../styles/basic';
 
 import TodoCard from './TodoCard';
 
+import DetailWidgetCardExamples from '../../_libViews/detail-widget-card/examples/detailWidgetCard'
+import DetailWidgetCardRowExamples from '../../_libViews/detail-widget-card/examples/detailWidgetCardRow'
+
 /* eslint no-unused-vars:0 */
 import fbService from '../../dataApi/FB';
 
@@ -89,13 +92,13 @@ export default class Todo extends Component<Props, any> {
     const todoStyle = TODOS.TODO.TEXT;
     const todos = this.props.todos && this.props.todos.todos ? this.props.todos.todos : [];
     const todosNodes = todos.map((todo, index) => (
-      <li class="list-group-item" key={`todo${todo.id}`}>
-        <span class="float-left" style={todoStyle}>{todo.todo}</span>
-        <span class=" float-right">
+      <li class='list-group-item' key={`todo${todo.id}`}>
+        <span class='float-left' style={todoStyle}>{todo.todo}</span>
+        <span class=' float-right'>
           <span
             tabIndex={index}
-            role="menuItem"
-            class="fa fa-remove"
+            role='menuItem'
+            class='fa fa-remove'
             style={{ color: '#666', fontSize: '120%', cursor: 'pointer' }}
             onClick={this.memoizedHandleRemoveTodo(index)}
           />
@@ -107,10 +110,14 @@ export default class Todo extends Component<Props, any> {
       <Row>
         <Col>
           <Row>
+            <DetailWidgetCardRowExamples />
+            <DetailWidgetCardExamples />
+          </Row>
+          <Row>
             <h3>{title}</h3>
           </Row>
           <Row>
-            <Col class="col-sm-6">
+            <Col class='col-sm-6'>
               <div>
                 <BasicInput
                   ref={this.refHandlertextBasicInput}
@@ -121,12 +128,18 @@ export default class Todo extends Component<Props, any> {
                 />
                 <TodoCard />
               </div>
-              <Button color="primary" onClick={this.handleAddTodo} disabled={!this.state.textBasicInputValue}>ADD TODO</Button>
+              <Button
+                color='primary'
+                onClick={this.handleAddTodo}
+                disabled={!this.state.textBasicInputValue}
+              >
+                  ADD TODO
+              </Button>
             </Col>
           </Row>
           <Row>
-            <Col class="col-sm-6">
-              {todosNodes && todosNodes.length > 0 && <ul class="list-group">{todosNodes}</ul>}
+            <Col class='col-sm-6'>
+              {todosNodes && todosNodes.length > 0 && <ul class='list-group'>{todosNodes}</ul>}
             </Col>
           </Row>
         </Col>

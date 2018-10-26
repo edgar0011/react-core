@@ -31,11 +31,11 @@ const app = document.getElementById('app');
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Redirect from="/" to="main" />
-      <Route path="/" component={MainLayout}>
-        <Route path="main" exact component={Main} />
-        <Route path="todo" exact component={Todo} />
-        <Route path="tags" exact component={Tagger} />
+      <Redirect from='/' to='main' />
+      <Route path='/' component={MainLayout}>
+        <Route path='main' exact component={Main} />
+        <Route path='todo' exact component={Todo} />
+        <Route path='tags' exact component={Tagger} />
       </Route>
     </Router>
   </Provider>

@@ -131,9 +131,9 @@ export default class Tagger extends PureComponent<Props, any> {
     const { tags, tagsA } = this.props;
     const { selectedTag, newTag } = this.state;
     const tagNodes = tags.map(tag => (
-      <li class="list-group-item" key={`tag${tag.id}`}>
-        <span class="float-left" style={{ color: '#000' }}>{tag.value}</span>
-        <span class=" float-right">
+      <li class='list-group-item' key={`tag${tag.id}`}>
+        <span class='float-left' style={{ color: '#000' }}>{tag.value}</span>
+        <span class=' float-right'>
           <TagComponent tag={tag} onClick={this.handleRemoveTagFactory(tag)} />
         </span>
       </li>
@@ -146,17 +146,17 @@ export default class Tagger extends PureComponent<Props, any> {
             <h3>{title}</h3>
           </Row>
           <Row>
-            <Col class="col-sm-6">
+            <Col class='col-sm-6'>
               <div>
-                <input name="newTag" type="text" onChange={this.handleInput} value={newTag} />
+                <input name='newTag' type='text' onChange={this.handleInput} value={newTag} />
               </div>
-              <Button color="primary" onClick={this.handleAddTag}>ADD TAG</Button>
+              <Button color='primary' onClick={this.handleAddTag}>ADD TAG</Button>
             </Col>
           </Row>
           <Row>
             <Col>
               <Creatable
-                name="form-field-name"
+                name='form-field-name'
                 value={selectedTag}
                 multi
                 options={tags}
@@ -168,8 +168,8 @@ export default class Tagger extends PureComponent<Props, any> {
             </Col>
           </Row>
           <Row>
-            <Col class="col-sm-6">
-              {tagNodes && tagNodes.length > 0 && <ul class="list-group">{tagNodes}</ul>}
+            <Col class='col-sm-6'>
+              {tagNodes && tagNodes.length > 0 && <ul class='list-group'>{tagNodes}</ul>}
             </Col>
           </Row>
         </Col>
@@ -184,8 +184,8 @@ const Tag = ({ tag, onClick }: { tag: {value: string, id: string}, onClick: Func
   return (
     <span
       tabIndex={tag.id}
-      role="menuItem"
-      class="fa fa-remove"
+      role='menuItem'
+      class='fa fa-remove'
       onClick={onClick}
       style={{ color: '#666', fontSize: '120%', cursor: 'pointer' }}
     />

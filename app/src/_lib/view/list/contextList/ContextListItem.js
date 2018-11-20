@@ -6,13 +6,13 @@ import { clickHandler } from '../../utils'
 import type { HeadlessRender } from '../../common/HeadlessComponentBase'
 
 type ContextListItemProps = {
-  item: any,
+  item: { id: number | string },
   activeId?: number | string,
-  idPropName?: string,
+  idPropName: string,
   title?: string,
   description?: string,
   active?: boolean,
-  onItemClickHandler: Function,
+  onItemClickHandler: (item: Object) => void,
 } & HeadlessRender
 
 /**
@@ -34,9 +34,9 @@ class ContextListItem extends PureComponent<ContextListItemProps> {
     super(props)
   }
 
-  keyDownHandler = (event: SyntheticEvent<EventTarget>) => {
+  keyDownHandler = (event: SyntheticEvent<EventTarget>): void => {
     if (clickHandler(event)) {
-      const { item, idPropName, onItemClickHandler } = this.props
+      const { item, idPropName, onItemClickHandler }: ContextListItemProps = this.props
       onItemClickHandler(item[idPropName])
     }
   }
@@ -47,7 +47,7 @@ class ContextListItem extends PureComponent<ContextListItemProps> {
     const {
       item, idPropName, activeId, onItemClickHandler, render, RenderComponent, ...props
     }: ContextListItemProps = this.props
-    const isActive = activeId === item[idPropName]
+    const isActive: boolean = activeId === item[idPropName]
 
     let rendered: Node
     if (render) {
@@ -61,7 +61,7 @@ class ContextListItem extends PureComponent<ContextListItemProps> {
         />
       ) : null
     }
-
+    // TODO memoize handlers
     return (
       <div tabIndex='0' role='menu' onClick={onItemClickHandler(item[idPropName])} onKeyUp={this.keyDownHandler}>
         {rendered}

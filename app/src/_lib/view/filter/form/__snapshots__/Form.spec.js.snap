@@ -1,31 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TreeList should render TreeList 1`] = `
+exports[`Form should render Form 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
-  Symbol(enzyme.__unrendered__): <TreeList
-    editable={false}
-    headerJustify="flex-end"
-    headerTitle=""
-    treeListData={
+  Symbol(enzyme.__unrendered__): <Form
+    fieldValues={
       Object {
-        "columns": Array [
-          Object {
-            "id": 1,
-            "label": "",
-          },
-        ],
-        "data": Array [
-          Object {
-            "collapsed": false,
-            "columns": Array [],
-            "id": 0,
-            "label": "",
-          },
-        ],
-        "treeListId": "treeListComponent",
+        "input1": "Hello Form",
       }
     }
+    fields={
+      Array [
+        Object {
+          "label": "Input1",
+          "name": "input1",
+        },
+      ]
+    }
+    renderFieldMethod={[Function]}
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],

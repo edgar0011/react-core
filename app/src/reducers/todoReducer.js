@@ -5,7 +5,7 @@ export default function todoReducer(state = { todos: [] }, action) {
   const type = action.type;
 
   if (type === ADD_TODO) {
-    const id = Date.now();
+    const id = action.id || Date.now();
     return {
       ...state,
       todos: [...state.todos, { todo: action.payload.text, id }],

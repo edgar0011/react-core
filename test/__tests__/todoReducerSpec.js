@@ -8,12 +8,14 @@ describe('reducer', () => {
   describe('ADD_TODO', () => {
     it('should add a new Todo item', () => {
       const initialState = { todos: [] };
+      const id = Date.now();
       const action = {
+        id,
         type: ADD_TODO,
         payload: { text: 'New TODO' },
       };
       const nextState = todoReducer(initialState, action);
-      const id = Date.now();
+
       expect(nextState).to.deep.equal({ todos: [{ id, todo: 'New TODO' }] });
     });
   });

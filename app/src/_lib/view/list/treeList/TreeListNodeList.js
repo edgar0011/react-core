@@ -1,7 +1,14 @@
+// @flow
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import type { Node } from 'react'
+import type { HeadlessRender } from '../../common/HeadlessComponentBase'
+import type { DataItem } from './TreeList'
 
-// TODO: move to core-fe
+
+type TreeListNodeListProps = {
+  data: ?Array<DataItem>
+} & HeadlessRender
+
 /**
  * @class
  * @name TreeListNodeList
@@ -10,35 +17,22 @@ import PropTypes from 'prop-types'
  * @prop {function} render Render function must be specified unless RenderComponent is specified.
  * @prop {ComponentType} RenderComponent Render component must be specified unless render function is specified.
  */
-export default class TreeListNodeList extends PureComponent {
-  static propTypes = {
-    data: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-      label: PropTypes.string,
-      collapsed: PropTypes.bool,
-      columns: PropTypes.arrayOf(PropTypes.oneOfType([
-        PropTypes.bool,
-        PropTypes.object,
-        PropTypes.string
-      ])).isRequired,
-      children: PropTypes.arrayOf(PropTypes.object)
-    })).isRequired,
-    render: PropTypes.func,
-    RenderComponent: PropTypes.any
-  }
+export default class TreeListNodeList extends PureComponent<TreeListNodeListProps> {
+
+  props: TreeListNodeListProps
 
   render() {
-    const { render, RenderComponent, ...props } = this.props
+    const { render, RenderComponent, ...props }: TreeListNodeListProps = this.props
 
-    let rendered
+    let rendered: Node
     if (render) {
       rendered = render({ ...props })
     } else {
-      rendered = (
+      rendered = RenderComponent ? (
         <RenderComponent
           {...props}
         />
-      )
+      ) : null
     }
     return rendered
   }

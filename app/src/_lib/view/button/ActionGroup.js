@@ -11,9 +11,17 @@ type ActionGroupProps = {
   data: Array<ComponentWithLabel>,
   preData: Array<ComponentWithLabel>,
   postData: Array<ComponentWithLabel>,
-  resolveButton: Function,
+  resolveButton: (props: ?Object) => ComponentType<any>,
   justify?: string
 } & HeadlessRender
+
+type PassProps = {
+  data: Array<ComponentWithLabel>,
+  preData: Array<ComponentWithLabel>,
+  postData: Array<ComponentWithLabel>,
+  justify?: string,
+  buttons: Array<Element<any>>
+}
 /**
  * @class
  * @name ActionGroup
@@ -44,8 +52,8 @@ export default class ActionGroup extends PureComponent<ActionGroupProps> {
   renderNodes = (buttonsData: Array<ComponentWithLabel>): Array<Element<any>> =>
     buttonsData.map(({ label, ...buttonProps }: { label: string, ...any}) => {
       const { resolveButton }: ActionGroupProps = this.props
-      const Component = resolveButton(buttonProps)
-      const key = `${Component.toString()}-${label || buttonProps.title}`
+      const Component: ComponentType<any> = resolveButton(buttonProps)
+      const key: string = `${Component.toString()}-${label || buttonProps.title}`
       return <Component key={key} {...buttonProps} label={label} >{label}</Component>
     })
 
@@ -57,11 +65,11 @@ export default class ActionGroup extends PureComponent<ActionGroupProps> {
    */
   render() {
     const { data, render, RenderComponent, resolveButton, ...props }: ActionGroupProps = this.props
-    const buttons = data && data.length ? this.renderNodes(data) : null
+    const buttons: ?Array<Element<any>> = data && data.length ? this.renderNodes(data) : null
     if (!buttons) {
       return null
     }
-    const passProps = { buttons, data, ...props }
+    const passProps: PassProps = { buttons, data, ...props }
     let rendered: Node
     if (render) {
       rendered = render(passProps)

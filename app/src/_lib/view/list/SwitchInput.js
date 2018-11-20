@@ -17,7 +17,7 @@ export type SwitchInputPropTypes = {
   value?: ValueType | ValuesType,
   options: ?OptionTypesWithValue,
   disabled?: boolean,
-  onChange: ({ target: { value: ?(ValueType | ValuesType)}}) => void,
+  onChange?: ({ target: { value: ?(ValueType | ValuesType)}}) => void,
   multiple?: boolean,
   components?: {
     OptionComponent?: ComponentType<any>,
@@ -102,7 +102,7 @@ export default class SwitchInput extends PureComponent<SwitchInputPropTypes> {
         foundSelected = foundOne.value
       }
     }
-    this.props.onChange({ target: { value: foundSelected } })
+    this.props.onChange && this.props.onChange({ target: { value: foundSelected } })
   }
 
   /**

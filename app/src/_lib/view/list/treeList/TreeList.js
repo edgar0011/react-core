@@ -1,5 +1,35 @@
+// @flow
+
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import type { Node } from 'react'
+import type { HeadlessRender } from '../../common/HeadlessComponentBase'
+
+
+export type Column = {
+  id: number | string,
+  label?: string
+}
+
+export type DataItem = {
+  id: number | string,
+  label?: string,
+  collapsed?: boolean,
+  columns: Array<boolean | Object | string>,
+  children: Array<DataItem>
+}
+
+type TreeListProps = {
+  treeListData: {
+    columns: ?Array<Column>,
+    data: ?Array<DataItem>,
+    onArrowClick: Function,
+    onCheckboxClick: Function
+  },
+  editable?: boolean,
+  headerTitle: string,
+  headerNodeStyle: Object,
+  headerJustify: string
+} & HeadlessRender
 
 /**
  * @class
@@ -20,34 +50,7 @@ import PropTypes from 'prop-types'
  * @prop {?Function} render Render function must be specified unless RenderComponent is specified.
  * @prop {?any} RenderComponent Render component must be specified unless render function is specified.
  */
-export default class TreeList extends PureComponent {
-  static propTypes = {
-    treeListData: PropTypes.shape({
-      columns: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-        label: PropTypes.string
-      })).isRequired,
-      data: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-        label: PropTypes.string,
-        collapsed: PropTypes.bool,
-        columns: PropTypes.arrayOf(PropTypes.oneOfType([
-          PropTypes.bool,
-          PropTypes.object,
-          PropTypes.string
-        ])).isRequired,
-        children: PropTypes.arrayOf(PropTypes.object)
-      })).isRequired,
-      onArrowClick: PropTypes.func,
-      onCheckboxClick: PropTypes.func
-    }),
-    editable: PropTypes.bool,
-    headerTitle: PropTypes.string,
-    headerNodeStyle: PropTypes.object,
-    headerJustify: PropTypes.string,
-    render: PropTypes.func,
-    RenderComponent: PropTypes.any
-  }
+export default class TreeList extends PureComponent<TreeListProps> {
 
   static defaultProps = {
     treeListData: {
@@ -68,21 +71,23 @@ export default class TreeList extends PureComponent {
     headerJustify: 'flex-end'
   }
 
-  render() {
-    const { treeListData, render, RenderComponent, ...props } = this.props
-    const { data } = treeListData
+  props: TreeListProps
 
-    let rendered
+  render() {
+    const { treeListData, render, RenderComponent, ...props }: TreeListProps = this.props
+    const { data }: { data: ?Array<DataItem> } = treeListData
+
+    let rendered: Node
     if (render) {
-      rendered = render({ treeListData, data: [...data], ...props })
+      rendered = render({ treeListData, data: data ? data.concat() : null, ...props })
     } else {
-      rendered = (
+      rendered = RenderComponent ? (
         <RenderComponent
           treeListData={treeListData}
-          data={[...data]}
+          data={data ? data.concat() : null}
           {...props}
         />
-      )
+      ) : null
     }
     return rendered
   }

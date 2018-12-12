@@ -6,17 +6,17 @@ import { Button, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { memoize } from 'lodash';
-import { Creatable } from 'react-select';
+import shortid from 'shortid';
+import { Creatable, Async } from 'react-select';
 import 'react-select/dist/react-select.css';
-
 import Raven from 'raven-js'
-
 import { pure } from 'recompose';
 import { createSelector, createStructuredSelector } from 'reselect';
 
 import AsyncLoader from '../ui/AsyncLoader';
 import * as tagActions from '../../actions/tagActions';
-// selectors
+
+// selectors'
 const rootSelector = state => state.tags;
 const rootSelector2 = state => state.tags;
 
@@ -48,10 +48,7 @@ type Props = {
 const cc = createStructuredSelector({
   tags: tagsSelector, tagsA: tagsAselector, isLoading: tagsLoadingSelector
 });
-@connect((state) => {
-  const pp = cc(state);
-  return pp;
-}, {
+@connect(() => cc, {
   addTag: tagActions.addTag,
   removeTag: tagActions.removeTag,
   getTags: tagActions.getTags,
@@ -72,7 +69,7 @@ export default class Tagger extends PureComponent<Props, any> {
 
   constructor(props: any, context: any) {
     super(props, context);
-    this.loadTags();
+    this.loadTags()
     this.state = { newTag: '', selectedTag: null };
 
     this.handleRemoveTagFactory = memoize(this.handleRemoveTag);
@@ -95,6 +92,13 @@ export default class Tagger extends PureComponent<Props, any> {
   };
 
   loadTags = () => this.props.getTags();
+
+  searchTags = async (value: string) => {
+    const tagsResponse = await this.props.getTags();
+    
+    return { options: tagsResponse.data.result.map(
+      tag => ({ value: `${tag} ${value}`, label: `${tag} ${value}`, id: shortid.generate() })) }
+  }
 
   changeHandler = (val: tagObjectType) => {
     console.log('Selected: ', val);
@@ -164,6 +168,17 @@ export default class Tagger extends PureComponent<Props, any> {
                 optionRenderer={this.renderOption}
                 newOptionCreator={this.newOptionHandler}
                 onNewOptionClick={this.newOptionClickHandler}
+              />
+            </Col>
+            <Col>
+              <Async
+                name='form-field-name'
+                value={selectedTag}
+                loadOptions={this.searchTags}
+                onChange={this.changeHandler}
+                optionRenderer={this.renderOption}
+                XnewOptionCreator={this.newOptionHandler}
+                XonNewOptionClick={this.newOptionClickHandler}
               />
             </Col>
           </Row>

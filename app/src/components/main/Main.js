@@ -108,13 +108,12 @@ export default class Main extends Component<any, any> {
       const state = this.state;
       this.setState({ ...state, userDetailOpened: true });
     }, (error) => {
-      console.log('handleUserClick error ', error);
+      console.error('handleUserClick error ', error);
     });
   }
 
   hideUserDetail = (): void => {
     this.setState({ userDetailOpened: false });
-    throw new Error('ReactCore sample error, handleUserClick');
   }
 
   handleRemoveUser = (id: number) => (event: SyntheticEvent<any>) => {

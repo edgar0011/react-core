@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom'
 
 /* eslint react/no-multi-comp:0 */
 /* eslint react/prefer-stateless-function:0 */
 
-export class User extends React.Component {
+class UserClazz extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('User')
+    console.log(props)
+  }
   // getChildContext serves as the initializer for our context values
   getChildContext() {
     const t = this.state ? this.state.clicked : null;
@@ -19,7 +25,10 @@ export class User extends React.Component {
     // debugger;
   }
 
-  clickHandler = () => this.setState({ clicked: Date.now() })
+  clickHandler = () => {
+    this.setState({ clicked: Date.now() })
+    this.props.history.push('/tags')
+  }
 
   render() {
     const { ...props } = this.props
@@ -38,10 +47,12 @@ export class User extends React.Component {
 
 // childContextTypes is defined on the context-provider, giving the
 // context values their corresponding type and passing them down the tree
-User.childContextTypes = {
+UserClazz.childContextTypes = {
   favColor: PropTypes.string,
   userName: PropTypes.string,
 };
+
+export const User = withRouter(UserClazz)
 
 export class UserCard extends React.Component {
   // Note that the UserCard component makes no use of context

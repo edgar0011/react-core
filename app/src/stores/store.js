@@ -4,12 +4,18 @@
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-
+import { routerReducer } from 'react-router-redux'
 import todoReducer from '../reducers/todoReducer';
 import userReducer from '../reducers/userReducer';
 import tagReducer from '../reducers/tagReducer';
 
-const combinedReducers = combineReducers({ todos: todoReducer, users: userReducer, tags: tagReducer });
+const combinedReducers = combineReducers({
+  todos: todoReducer,
+  users: userReducer,
+  tags: tagReducer,
+  routing: routerReducer
+
+});
 
 const rootReducer = (state, action) => combinedReducers(state, action);
 

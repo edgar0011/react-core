@@ -2,9 +2,11 @@
 
 import React, { Component } from 'react';
 
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 import { Container, Row, Col } from 'reactstrap';
+
+import Routes from '../routes'
 
 export default class MainLayout extends Component<any, any> {
   static contextTypes: {
@@ -21,7 +23,6 @@ export default class MainLayout extends Component<any, any> {
 
   render() {
     const title = 'React Core, boilerplate app';
-    const props = this.props;
     console.log('MainLayout render');
     console.log(this.context);
     return (
@@ -34,13 +35,13 @@ export default class MainLayout extends Component<any, any> {
                 <Col>
                   <ul class=' nav justify-content-center'>
                     <li>
-                      <Link to='main' activeClassName='active' class='nav-item nav-link'>Main</Link>
+                      <NavLink to='/main' activeClassName='active' class='nav-item nav-link'>Main</NavLink>
                     </li>
                     <li>
-                      <Link to='todo' activeClassName='active' class='nav-item nav-link'>Todo</Link>
+                      <NavLink to='/todo' activeClassName='active' class='nav-item nav-link'>Todo</NavLink>
                     </li>
                     <li>
-                      <Link to='tags' activeClassName='active' class='nav-item nav-link'>Tags</Link>
+                      <NavLink to='/tags' activeClassName='active' class='nav-item nav-link'>Tags</NavLink>
                     </li>
                   </ul>
                 </Col>
@@ -48,9 +49,10 @@ export default class MainLayout extends Component<any, any> {
             </div>
           </Col>
         </Row>
-
         <Row>
-          <Col>{props.children}</Col>
+          <Col>
+            <Routes location={this.props.location} />
+          </Col>
         </Row>
       </Container>
     );

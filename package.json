@@ -13,7 +13,6 @@
     "flow": "flow",
     "flow:install": "flow-typed install",
     "flow:update": "flow-typed update",
-    "start0": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "start": "NODE_ENV=production babel-node server.js --presets env,stage-2",
     "lint": "eslint ./app --cache --ignore-pattern .gitignore",
     "precommit": "yarn run flow && yarn run lint"

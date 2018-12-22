@@ -7,7 +7,7 @@ import Tagger from "./components/tag/Tagger";
 
 const Routes = ({ location }) => (
   <div>
-    {['/', ''].includes(location.pathname)  && <Redirect strict from='/' to='/main' />}
+    {['/', ''].includes(location.pathname)  && <Redirect strict to='/main' />}
     <Route path='/main' exact component={Main} />
     <Route path='/todo' exact component={Todo} />
     <Route path='/tags' exact component={Tagger} />

@@ -45,10 +45,10 @@ type Props = {
   getTags: Function,
   isLoading: boolean,
 }
-const cc = createStructuredSelector({
+const mapStsateToProps = createStructuredSelector({
   tags: tagsSelector, tagsA: tagsAselector, isLoading: tagsLoadingSelector
 });
-@connect(() => cc, {
+@connect(mapStsateToProps, {
   addTag: tagActions.addTag,
   removeTag: tagActions.removeTag,
   getTags: tagActions.getTags,
@@ -132,7 +132,7 @@ export default class Tagger extends PureComponent<Props, any> {
 
   render() {
     const title = 'Tags';
-    const { tags, tagsA } = this.props;
+    const { tags } = this.props;
     const { selectedTag, newTag } = this.state;
     const tagNodes = tags.map(tag => (
       <li class='list-group-item' key={`tag${tag.id}`}>
@@ -142,7 +142,7 @@ export default class Tagger extends PureComponent<Props, any> {
         </span>
       </li>
     ));
-    console.log('tagsA', tagsA);
+    console.log('TAGGER props', this.props);
     return (
       <Row>
         <Col>
@@ -195,7 +195,7 @@ export default class Tagger extends PureComponent<Props, any> {
 
 
 const Tag = ({ tag, onClick }: { tag: {value: string, id: string}, onClick: Function }) => {
-  console.log('rendering Tag', tag);
+  // console.log('rendering Tag', tag);
   return (
     <span
       tabIndex={tag.id}

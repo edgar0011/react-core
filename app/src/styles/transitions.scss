@@ -8,7 +8,6 @@
   transition: opacity 250ms ease-in;
 }
 
-
 .slide {
   transform: translate(-100%);
   transition: transform 250ms ease-in-out;
@@ -17,13 +16,16 @@
 .slide-enter {
   transform: translate(100%);
 }
+
 .slide-enter.slide-enter-active {
   transform: translate(0%);
   transition: transform 250ms ease-in-out;
 }
+
 .slide-exit {
   transform: translate(0%);
 }
+
 .slide-exit.slide-exit-active {
   transform: translate(-100%);
   transition: transform 250ms ease-in-out;

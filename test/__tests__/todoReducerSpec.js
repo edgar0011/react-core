@@ -1,6 +1,3 @@
-
-import { expect, assert } from 'chai';
-
 import todoReducer from '../../app/src/reducers/todoReducer';
 import { ADD_TODO, REMOVE_TODO } from '../../app/src/config/CONSTANTS';
 
@@ -16,7 +13,7 @@ describe('reducer', () => {
       };
       const nextState = todoReducer(initialState, action);
 
-      expect(nextState).to.deep.equal({ todos: [{ id, todo: 'New TODO' }] });
+      expect(nextState).toEqual({ todos: [{ id, todo: 'New TODO' }] });
     });
   });
 
@@ -31,7 +28,7 @@ describe('reducer', () => {
       };
       const nextState = todoReducer(initialState, action);
 
-      expect(nextState).to.deep.equal({ todos: [{ id: id2, todo: 'Other TODO not to be removed' }] });
+      expect(nextState).toEqual({ todos: [{ id: id2, todo: 'Other TODO not to be removed' }] });
     });
 
     it('should do nothing if the Todo item to delete is not present', () => {
@@ -44,7 +41,7 @@ describe('reducer', () => {
       };
       const nextState = todoReducer(initialState, action);
 
-      expect(nextState).to.deep.equal({ todos: [{ id, todo: 'New TODO to be removed' }, { id: id2, todo: 'Other TODO not to be removed' }] });
+      expect(nextState).toEqual({ todos: [{ id, todo: 'New TODO to be removed' }, { id: id2, todo: 'Other TODO not to be removed' }] });
     });
   });
 });

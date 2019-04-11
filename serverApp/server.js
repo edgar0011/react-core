@@ -1,6 +1,7 @@
 
 import express from 'express';
 import request from 'request';
+import path from "path";
 
 const app = express();
 
@@ -10,6 +11,11 @@ app.use('/api', function(req, res) {
 
 /* global __dirname */
 app.use(express.static(`${__dirname}/dist`));
+
+app.use('*', function(req, res) {
+  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+});
+
 
 
 const server = app.listen(process.env.PORT || 8080, () => {

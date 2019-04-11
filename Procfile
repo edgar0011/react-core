@@ -1,1 +1,0 @@
-web: babel-node server.js --presets env,stage-2

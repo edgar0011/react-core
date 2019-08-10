@@ -103,7 +103,6 @@
     "react-scroll": "^1.7.10",
     "react-select": "^1.0.0-rc.10",
     "react-spring": "^7.2.8",
-    "react-transition-group": "^2.5.1",
     "react-with-gesture": "^4.0.2",
     "react-transition-group": "^2.5.2",
     "reactstrap": "5.0.0-alpha.4",

@@ -74,6 +74,12 @@ export default class Tagger extends PureComponent<Props, any> {
 
     this.handleRemoveTagFactory = memoize(this.handleRemoveTag);
   }
+  state = {
+    select1Loading: false,
+    select2Loading: false,
+    selectedTag: null,
+    newTag: null,
+  }
 
   props: Props
 
@@ -94,8 +100,9 @@ export default class Tagger extends PureComponent<Props, any> {
   loadTags = () => this.props.getTags();
 
   searchTags = async (value: string) => {
+    this.setState((prevState) => ({ ...prevState, select2Loading: true }))
     const tagsResponse = await this.props.getTags();
-    
+    this.setState((prevState) => ({ ...prevState, select2Loading: false }))
     return { options: tagsResponse.data.result.map(
       tag => ({ value: `${tag} ${value}`, label: `${tag} ${value}`, id: shortid.generate() })) }
   }

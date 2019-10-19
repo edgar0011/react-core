@@ -9,9 +9,10 @@ app.use('/api', function(req, res) {
   req.pipe(request(req.query.server + req.query.url)).pipe(res);
 });
 
+app.use('/privacy-policy',(req, res) => res.sendFile(path.join(__dirname, './privacy-policy.html')));
+
 /* global __dirname */
 app.use(express.static(path.join(__dirname, '../dist')));
-
 
 const server = app.listen(process.env.PORT || 8080, () => {
   console.log(`server running at: ${server.address().port}`);

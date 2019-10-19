@@ -14,7 +14,7 @@ const Routes = ({ location }) => (
   <TransitionGroup>
     <CSSTransition
       key={location.key}
-      classNames='slide'
+      classNames='page'
       timeout={250}
     >
       <Switch location={location}>

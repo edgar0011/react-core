@@ -1,12 +1,12 @@
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Row, Col } from 'reactstrap';
 
 import PropTypes from 'prop-types';
 
 import { UserCard } from '../user/User';
 
-export default class TodoCard extends Component<any, any> {
+export default class TodoCard extends PureComponent<any, any> {
   // eslint-disable-next-line
   constructor(props: any, context: any) {
     super(props, context);

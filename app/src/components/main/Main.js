@@ -1,7 +1,7 @@
 
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Button, Col, Row } from 'reactstrap';
 import Collapse from 'react-collapse';
 import { connect } from 'react-redux';
@@ -48,7 +48,7 @@ const data = [
 }, { getUsers: usersActions.getUsers,
   getUser: usersActions.getUser,
   removeUser: usersActions.removeUser })
-export default class Main extends Component<any, any> {
+export default class Main extends PureComponent<any, any> {
   static propTypes = {
     getUsers: PropTypes.func,
     getUser: PropTypes.func,

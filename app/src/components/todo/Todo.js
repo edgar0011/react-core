@@ -1,7 +1,7 @@
 
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Button, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -30,7 +30,7 @@ type Props = {
   const { todos } = store;
   return { todos };
 }, { addTodo: addTodoActions.addTodo, removeTodo: addTodoActions.removeTodo })
-export default class Todo extends Component<Props, any> {
+export default class Todo extends PureComponent<Props, any> {
 
   constructor(props: any, context: any) {
     super(props, context);
